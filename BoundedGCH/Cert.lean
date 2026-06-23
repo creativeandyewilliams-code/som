@@ -29,19 +29,19 @@ abbrev Code := List Bool
 /-- All codes of exact length `n`. -/
 def codesOfLength : Nat → List Code
   | 0 => [[]]
-  | n + 1 => (codesOfLength n).flatMap (fun l => [false :: l, true :: l])
+  | n + 1 => (codesOfLength n).bind (fun l => [false :: l, true :: l])
 
 /-- `Definition (Assessment budget)`: the finite candidate universe
 `𝒰_B = Σ^{≤N}` admitted by a budget `B = (N, T)`. -/
 def codesUpTo (N : Nat) : List Code :=
-  (List.range (N + 1)).flatMap codesOfLength
+  (List.range (N + 1)).bind codesOfLength
 
 theorem mem_codesOfLength {n : Nat} {c : Code} :
     c ∈ codesOfLength n ↔ c.length = n := by
   induction n generalizing c with
   | zero => simp [codesOfLength]
   | succ n ih =>
-    simp only [codesOfLength, List.mem_flatMap, List.mem_cons, List.not_mem_nil, or_false]
+    simp only [codesOfLength, List.mem_bind, List.mem_cons, List.not_mem_nil, or_false]
     constructor
     · rintro ⟨l, hl, hc | hc⟩ <;> subst hc <;> simp [ih.mp hl]
     · intro hc
@@ -56,7 +56,7 @@ theorem mem_codesOfLength {n : Nat} {c : Code} :
 the budget — the precise content of `𝒰_B = Σ^{≤N}`. -/
 theorem mem_codesUpTo_iff {N : Nat} {d : Code} : d ∈ codesUpTo N ↔ d.length ≤ N := by
   unfold codesUpTo
-  rw [List.mem_flatMap]
+  rw [List.mem_bind]
   constructor
   · rintro ⟨r, hr, hc⟩
     have h1 := mem_codesOfLength.mp hc
@@ -144,10 +144,18 @@ instance noDef_decidable (L : Ledger) (B : Budget) :
 
 /-! ### Reachability in the finite dependency graph -/
 
+/-- Remove duplicates from a list of `Nat`, keeping the set of elements
+unchanged. (Core Lean has no `List.dedup`; this is the obvious manual
+implementation, needed here so the fixpoint iteration below actually
+terminates by strict size growth rather than looping on repeated
+duplicate insertions.) -/
+def dedupNat (l : List Nat) : List Nat :=
+  l.foldr (fun a acc => if a ∈ acc then acc else a :: acc) []
+
 /-- One step of forward closure: extend a vertex set `S` by the out-neighbors
 (in `E`) of vertices already in `S`. -/
 def stepReach (E : List (Nat × Nat)) (S : List Nat) : List Nat :=
-  (S ++ E.filterMap (fun e => if e.1 ∈ S then some e.2 else none)).dedup
+  dedupNat (S ++ E.filterMap (fun e => if e.1 ∈ S then some e.2 else none))
 
 /-- Iterate `stepReach` until a fixpoint, or `fuel` runs out. -/
 def closureReach (E : List (Nat × Nat)) (S : List Nat) : Nat → List Nat
@@ -172,7 +180,7 @@ def Ledger.reaches (L : Ledger) (u v : Nat) : Bool :=
 /-- One step of forward closure avoiding a set of forbidden intermediate
 vertices (used to test "every path meets 𝖬"). -/
 def stepAvoid (E : List (Nat × Nat)) (avoid : List Nat) (S : List Nat) : List Nat :=
-  (S ++ E.filterMap (fun e => if e.1 ∈ S ∧ ¬ e.2 ∈ avoid then some e.2 else none)).dedup
+  dedupNat (S ++ E.filterMap (fun e => if e.1 ∈ S ∧ ¬ e.2 ∈ avoid then some e.2 else none))
 
 def closureAvoid (E : List (Nat × Nat)) (avoid : List Nat) (S : List Nat) :
     Nat → List Nat
