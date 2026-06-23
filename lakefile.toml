@@ -1,0 +1,5 @@
+name = "som"
+defaultTargets = ["BoundedGCH"]
+
+[[lean_lib]]
+name = "BoundedGCH"

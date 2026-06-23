@@ -1,0 +1,39 @@
+name: Lean build certificate
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: lake build (BoundedGCH)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
+          chmod +x elan-init.sh
+          ./elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: lake build
+        run: lake build
+
+      - name: Record build certificate
+        run: |
+          {
+            echo "commit: $(git rev-parse HEAD)"
+            echo "lean: $(lean --version)"
+            echo "lake: $(lake --version)"
+            echo "status: BUILD SUCCEEDED"
+          } | tee BUILD_CERTIFICATE.txt
+
+      - name: Upload build certificate
+        uses: actions/upload-artifact@v4
+        with:
+          name: lean-build-certificate
+          path: BUILD_CERTIFICATE.txt
