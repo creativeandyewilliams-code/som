@@ -298,8 +298,8 @@ theorem defeater_detection {L : Ledger} {B : Budget} {m : MappingRow}
     obtain ⟨_, _, _, hNo⟩ := gcert_soundness hgb
     have hdU : d ∈ codesUpTo B.N := by
       unfold accB at hd
-      rcases Bool.and_eq_true.mp hd with ⟨h1, _⟩
-      simpa using h1
+      rw [Bool.and_eq_true] at hd
+      simpa using hd.1
     have := hNo m hm d hdU
     rw [hd] at this
     exact absurd this (by decide)
