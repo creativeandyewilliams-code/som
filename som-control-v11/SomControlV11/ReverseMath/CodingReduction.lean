@@ -48,7 +48,13 @@ theorem in_range_atOne (f : ℕ → ℕ) (y : ℕ) (hy : ∃ x₀, f x₀ = y) :
   have h2k_lt_m1 : (2 : ℚ)^k < (m : ℚ) + 1 := by
     have h2k_le : (2 : ℕ)^k ≤ m := Nat.le_max_right (max M x₀) (2^k)
     exact_mod_cast Nat.lt_succ_of_le h2k_le
-  exact (one_div_lt_one_div_iff h2k).mpr h2k_lt_m1
+  have hineq : (0 : ℚ) < 1 / (2 : ℚ)^k - 1 / ((m : ℚ) + 1) := by
+    have heq : 1 / (2 : ℚ)^k - 1 / ((m : ℚ) + 1) =
+        ((m : ℚ) + 1 - (2 : ℚ)^k) / ((2 : ℚ)^k * ((m : ℚ) + 1)) := by
+      field_simp [hm1.ne', h2k.ne']; ring
+    rw [heq]
+    exact div_pos (by linarith) (mul_pos h2k hm1)
+  linarith
 
 /-- y ∉ ran(f) implies a_f(y,·) satisfies Below with dyadic threshold. -/
 theorem not_in_range_below (f : ℕ → ℕ) (y : ℕ) (hy : ¬ ∃ x₀, f x₀ = y) :

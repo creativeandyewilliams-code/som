@@ -30,7 +30,7 @@ Build command:
 - Binding-sensitive diagnostic non-factorization                 [Diagnostic.Binding]
 - V11 coding reduction Level A (ambient Lean metatheory)         [ReverseMath.CodingReduction]
 - Audit equivalence setoid and coarsest audit quotient           [MSpace.AuditFamily]
-- Coarseness order and finite partition bound                    [MSpace.AuditQuotient]
+- Surjectivity of audit quotient map                            [MSpace.AuditQuotient]
 - Debt recurrence, divergence, and stable repair condition       [Ledger.DebtRecurrence]
 - Capacity dominance under cost monotonicity hypothesis          [Ledger.CapacityDominance]
 - Novelty separation (obs-history indistinguishable pair)        [Derivation.NoveltySeparation]
@@ -84,16 +84,16 @@ alias not_in_range_below := SomControlV11.ReverseMath.not_in_range_below
 alias coding_correct     := SomControlV11.ReverseMath.coding_correct
 
 -- MSpace audit quotient
-alias auditQuot_faithful         := SomControlV11.MSpace.auditQuot_faithful
-alias coarsest_audit_faithful    := SomControlV11.MSpace.coarsest_audit_faithful
-alias auditQuot_is_coarsest      := SomControlV11.MSpace.auditQuot_is_coarsest
-alias auditQuot_finite_partition := SomControlV11.MSpace.auditQuot_finite_partition
+alias auditQuot_faithful      := SomControlV11.MSpace.auditQuot_faithful
+alias coarsest_audit_faithful := SomControlV11.MSpace.coarsest_audit_faithful
+alias auditQuot_is_coarsest   := SomControlV11.MSpace.auditQuot_is_coarsest
+alias auditQuot_surjective    := SomControlV11.MSpace.auditQuot_surjective
 
 -- Ledger
-alias debt_nonneg                       := SomControlV11.Ledger.debt_nonneg
-alias debt_diverges                     := SomControlV11.Ledger.debt_diverges
+alias debt_nonneg                      := SomControlV11.Ledger.debt_nonneg
+alias debt_diverges                    := SomControlV11.Ledger.debt_diverges
 alias debt_stable_when_within_capacity := SomControlV11.Ledger.debt_stable_when_within_capacity
-alias auditQuot_capacity_dominance      := SomControlV11.Ledger.auditQuot_capacity_dominance
+alias auditQuot_capacity_dominance     := SomControlV11.Ledger.auditQuot_capacity_dominance
 
 -- Derivation
 alias novelty_separation           := SomControlV11.Derivation.novelty_separation

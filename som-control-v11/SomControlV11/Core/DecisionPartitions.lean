@@ -16,7 +16,7 @@ theorem kernelRel_equivalence {α γ : Type*} (T : α → γ) :
   ⟨fun _ => rfl, fun h => h.symm, fun h1 h2 => h1.trans h2⟩
 
 /-- q refines the T-kernel iff T factors through q. -/
-theorem refines_iff_factors {α β γ : Type*} (q : α → β) (T : α → γ) :
+theorem refines_iff_factors {α β γ : Type*} [Nonempty γ] (q : α → β) (T : α → γ) :
     (∀ x y, q x = q y → kernelRel T x y) ↔
     ∃ d : β → γ, ∀ x, T x = d (q x) :=
   (fiber_criterion q T).symm

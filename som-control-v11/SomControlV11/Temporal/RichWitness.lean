@@ -103,7 +103,13 @@ theorem xB_AtOne : AtOne xB := by
   have h2k_lt : (2 : ℚ)^k < (max M (2^k) : ℚ) + 1 := by
     have : (2 : ℕ)^k ≤ max M (2^k) := Nat.le_max_right M (2^k)
     exact_mod_cast Nat.lt_succ_of_le this
-  exact (one_div_lt_one_div_iff h2k).mpr h2k_lt
+  have hineq : (0 : ℚ) < 1 / (2 : ℚ)^k - 1 / ((max M (2^k) : ℚ) + 1) := by
+    have heq : 1 / (2 : ℚ)^k - 1 / ((max M (2^k) : ℚ) + 1) =
+        ((max M (2^k) : ℚ) + 1 - (2 : ℚ)^k) / ((2 : ℚ)^k * ((max M (2^k) : ℚ) + 1)) := by
+      field_simp [hm1.ne', h2k.ne']; ring
+    rw [heq]
+    exact div_pos (by linarith) (mul_pos h2k hm1)
+  linarith
 
 theorem xB_not_Below : ¬ Below xB := by
   intro ⟨k, hk, M, hM⟩

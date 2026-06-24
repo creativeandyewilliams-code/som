@@ -9,7 +9,7 @@ Provides reusable machinery for temporal, diagnostic, and derivational modules.
 namespace SomControlV11.Core
 
 /-- T factors through q iff q-fibers are T-constant (fiber criterion). -/
-theorem fiber_criterion {α β γ : Type*} (q : α → β) (T : α → γ) :
+theorem fiber_criterion {α β γ : Type*} [Nonempty γ] (q : α → β) (T : α → γ) :
     (∃ d : β → γ, ∀ x, T x = d (q x)) ↔
     (∀ x y : α, q x = q y → T x = T y) := by
   constructor
@@ -17,9 +17,11 @@ theorem fiber_criterion {α β γ : Type*} (q : α → β) (T : α → γ) :
     simp only [hd, hxy]
   · intro h
     open Classical in
-    exact ⟨fun b => T (Classical.epsilon (fun x => q x = b)), fun x => by
-      apply h
-      exact (Classical.epsilon_spec (p := fun a => q a = q x) ⟨x, rfl⟩).symm⟩
+    refine ⟨fun b => if hb : ∃ x : α, q x = b then T hb.choose else Classical.choice ‹_›,
+            fun x => ?_⟩
+    have hb : ∃ a : α, q a = q x := ⟨x, rfl⟩
+    simp only [dif_pos hb]
+    exact h x hb.choose hb.choose_spec.symm
 
 /-- A paired certificate: same q-image but different T-output witnesses non-factorization. -/
 structure PairedCertificate {α β γ : Type*} (q : α → β) (T : α → γ) where

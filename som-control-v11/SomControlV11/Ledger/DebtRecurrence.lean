@@ -22,7 +22,7 @@ theorem debt_nonneg (demand cap : ℕ → ℤ) (n : ℕ) :
     0 ≤ debtSeq demand cap n := by
   induction n with
   | zero => simp [debtSeq]
-  | succ n _ => simp [debtSeq, debtStep, le_max_left]
+  | succ n _ => simp [debtSeq, debtStep]
 
 /-- Under persistent margin ε > 0, debt grows at least linearly. -/
 theorem debt_diverges (demand cap : ℕ → ℤ) (ε : ℤ) (hε : 0 < ε)
@@ -36,6 +36,7 @@ theorem debt_diverges (demand cap : ℕ → ℤ) (ε : ℤ) (hε : 0 < ε)
     have hstep : debtSeq demand cap n + demand n - cap n ≥ (↑n + 1) * ε := by
       have := hmargin n; linarith
     have hcast : (↑(n + 1) : ℤ) = ↑n + 1 := by push_cast; ring
+    rw [← hcast] at hstep
     linarith [le_max_right 0 (debtSeq demand cap n + demand n - cap n)]
 
 /-- Sufficient repair: if the quotient lies within capacity, debt does not grow. -/
