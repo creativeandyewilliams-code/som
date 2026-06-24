@@ -8,6 +8,8 @@ import SomControlV11.MSpace.AuditFamily
 import SomControlV11.MSpace.AuditQuotient
 import SomControlV11.Ledger.DebtRecurrence
 import SomControlV11.Ledger.CapacityDominance
+import SomControlV11.Derivation.NoveltySeparation
+import SomControlV11.Derivation.AuditEquivalentNecessity
 
 /-!
 # SomControlV11.Release.V11Claims
@@ -30,10 +32,14 @@ Build command:
 - Coarseness order and finite partition bound                    [MSpace.AuditQuotient]
 - Debt recurrence, divergence, and stable repair condition       [Ledger.DebtRecurrence]
 - Capacity dominance under cost monotonicity hypothesis          [Ledger.CapacityDominance]
+- Novelty separation (obs-history indistinguishable pair)        [Derivation.NoveltySeparation]
+- Audit-equivalent necessity (Below not obs-computable)          [Derivation.AuditEquivalentNecessity]
+- No Bool-valued observation classifier for Below                [Derivation.AuditEquivalentNecessity]
+- No finite-history classifier for any depth n                   [Derivation.AuditEquivalentNecessity]
 
 ## Pending (proof holes present — excluded from release graph)
 - R³ edge-separated embedding (moment curve / Vandermonde)       [Visual.R3Embedding]
-- K₅ lower-bound obstruction                                     [Visual.PlanarityObstruction]
+- K₅ lower-bound obstruction (planarity)                        [Visual.PlanarityObstruction]
 - UGapTail <-> ACA0 (Level B: requires formalized RCA0 metatheory) [ReverseMath.ACA0Equivalence]
 - Generic P-space aspect-audit theorem                           [PSpace.GenericAspectAudit]
 
@@ -82,9 +88,16 @@ alias auditQuot_is_coarsest      := SomControlV11.MSpace.auditQuot_is_coarsest
 alias auditQuot_finite_partition := SomControlV11.MSpace.auditQuot_finite_partition
 
 -- Ledger
-alias debt_nonneg                        := SomControlV11.Ledger.debt_nonneg
-alias debt_diverges                      := SomControlV11.Ledger.debt_diverges
-alias debt_stable_when_within_capacity  := SomControlV11.Ledger.debt_stable_when_within_capacity
-alias auditQuot_capacity_dominance       := SomControlV11.Ledger.auditQuot_capacity_dominance
+alias debt_nonneg                       := SomControlV11.Ledger.debt_nonneg
+alias debt_diverges                     := SomControlV11.Ledger.debt_diverges
+alias debt_stable_when_within_capacity := SomControlV11.Ledger.debt_stable_when_within_capacity
+alias auditQuot_capacity_dominance      := SomControlV11.Ledger.auditQuot_capacity_dominance
+
+-- Derivation
+alias novelty_separation          := SomControlV11.Derivation.novelty_separation
+alias no_obs_separator            := SomControlV11.Derivation.no_obs_separator
+alias audit_equivalent_necessity  := SomControlV11.Derivation.audit_equivalent_necessity
+alias no_bool_classifier          := SomControlV11.Derivation.no_bool_classifier
+alias no_finite_history_classifier := SomControlV11.Derivation.no_finite_history_classifier
 
 end SomControlV11.Release

@@ -33,6 +33,7 @@ jobs:
               SomControlV11/ReverseMath \
               SomControlV11/MSpace \
               SomControlV11/Ledger \
+              SomControlV11/Derivation \
               SomControlV11/Release 2>/dev/null; then
             echo "ERROR: sorry or admit found in release graph"
             exit 1

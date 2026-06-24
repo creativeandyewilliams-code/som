@@ -100,10 +100,10 @@ theorem xB_AtOne : AtOne xB := by
   rw [a_iter_xB, gt_iff_lt, sub_lt_sub_iff_left]
   have h2k : (0 : ℚ) < (2 : ℚ)^k := by positivity
   have hm1 : (0 : ℚ) < (max M (2^k) : ℚ) + 1 := by positivity
-  rw [div_lt_div_iff hm1 h2k, one_mul, one_mul]
-  have : (2^k : ℚ) ≤ (max M (2^k) : ℚ) := by
-    exact_mod_cast Nat.le_max_right M (2^k)
-  linarith
+  have h2k_lt : (2 : ℚ)^k < (max M (2^k) : ℚ) + 1 := by
+    have : (2 : ℕ)^k ≤ max M (2^k) := Nat.le_max_right M (2^k)
+    exact_mod_cast Nat.lt_succ_of_le this
+  exact (one_div_lt_one_div_iff h2k).mpr h2k_lt
 
 theorem xB_not_Below : ¬ Below xB := by
   intro ⟨k, hk, M, hM⟩
