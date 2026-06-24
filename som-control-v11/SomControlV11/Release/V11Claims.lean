@@ -16,12 +16,12 @@ V11 formal companion release target — verified declarations only.
 Build command:
   lake build SomControlV11.Release.V11Claims
 
-## Verified (no sorry)
+## Verified (no proof holes)
 - Fiber criterion and paired certificate soundness                [Core.Factorization]
 - Typed diagnostic status (descent/nondescent/incomplete)        [Core.TypedRecord]
 - Kernel equivalence and coarsest decision partition             [Core.DecisionPartitions]
 - Rich temporal non-descent with V11 dyadic threshold 1-2^(-k)  [Temporal.RichWitness]
-- Monitor decoder (finite history ⇒ monitor output)             [Temporal.RichWitness]
+- Monitor decoder (finite history => monitor output)             [Temporal.RichWitness]
 - Strict history refinement                                      [Temporal.RichWitness]
 - Orbit target does not factor through full observation history  [Temporal.RichWitness]
 - Binding-sensitive diagnostic non-factorization                 [Diagnostic.Binding]
@@ -31,10 +31,10 @@ Build command:
 - Debt recurrence, divergence, and stable repair condition       [Ledger.DebtRecurrence]
 - Capacity dominance under cost monotonicity hypothesis          [Ledger.CapacityDominance]
 
-## Pending (excluded from release graph)
+## Pending (proof holes present — excluded from release graph)
 - R³ edge-separated embedding (moment curve / Vandermonde)       [Visual.R3Embedding]
 - K₅ lower-bound obstruction                                     [Visual.PlanarityObstruction]
-- UGapTail ↔ ACA₀ (Level B: requires formalized RCA₀ metatheory) [ReverseMath.ACA0Equivalence]
+- UGapTail <-> ACA0 (Level B: requires formalized RCA0 metatheory) [ReverseMath.ACA0Equivalence]
 - Generic P-space aspect-audit theorem                           [PSpace.GenericAspectAudit]
 
 ## Not formalized (empirical bridge)
@@ -82,9 +82,9 @@ alias auditQuot_is_coarsest      := SomControlV11.MSpace.auditQuot_is_coarsest
 alias auditQuot_finite_partition := SomControlV11.MSpace.auditQuot_finite_partition
 
 -- Ledger
-alias debt_nonneg                    := SomControlV11.Ledger.debt_nonneg
-alias debt_diverges                  := SomControlV11.Ledger.debt_diverges
-alias debt_stable_when_within_capacity := SomControlV11.Ledger.debt_stable_when_within_capacity
-alias auditQuot_capacity_dominance   := SomControlV11.Ledger.auditQuot_capacity_dominance
+alias debt_nonneg                        := SomControlV11.Ledger.debt_nonneg
+alias debt_diverges                      := SomControlV11.Ledger.debt_diverges
+alias debt_stable_when_within_capacity  := SomControlV11.Ledger.debt_stable_when_within_capacity
+alias auditQuot_capacity_dominance       := SomControlV11.Ledger.auditQuot_capacity_dominance
 
 end SomControlV11.Release
