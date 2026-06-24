@@ -66,7 +66,7 @@ lemma T_iter (m : ℕ) (θ : Bool) (s : ℕ → Bool) (i : ℕ) :
   | succ n ih =>
     rw [Function.iterate_succ_apply']
     simp only [T, ih]
-    simp [Nat.add_succ]
+    exact Prod.ext rfl (Prod.ext rfl (by omega))
 
 lemma p_iter_xA (m : ℕ) : p (T^[m] xA) = 0 := by
   simp [xA, p]
@@ -101,7 +101,7 @@ theorem tower_refines (n : ℕ) :
     ∃ x y : X, qFin n x = qFin n y ∧ qFin (n + 1) x ≠ qFin (n + 1) y := by
   refine ⟨(false, fun i => decide (i ≤ n), 0), (false, fun _ => true, 0), ?_, ?_⟩
   · simp only [qFin, o, T_iter, zero_add]
-    apply List.map_congr
+    apply List.map_congr_left
     intro k hk
     simp only [List.mem_range] at hk
     simp [Nat.le_of_lt_succ hk]
@@ -134,20 +134,18 @@ theorem tail_xB : ¬ Tail xB := by
   intro ⟨k, hk, M, hM⟩
   have hbound := hM (max M k) (le_max_left M k)
   rw [p_iter_xB] at hbound
-  have hkq : (0 : ℚ) < (k : ℚ) := Nat.cast_pos.mpr hk
+  have hkq : (0 : ℚ) < k := Nat.cast_pos.mpr hk
   have hm1q : (0 : ℚ) < (max M k : ℚ) + 1 := by positivity
   have h_lt : (k : ℚ) < (max M k : ℚ) + 1 := by
     exact_mod_cast Nat.lt_succ_of_le (le_max_right M k)
-  -- hbound gives 1/k ≤ 1/(max M k + 1); cross-multiply to get max M k + 1 ≤ k.
-  have h_inv : 1 / (k : ℚ) ≤ 1 / ((max M k : ℚ) + 1) := by linarith
-  have hmul : k * ((max M k : ℚ) + 1) * (1 / (k : ℚ)) ≤
-              k * ((max M k : ℚ) + 1) * (1 / ((max M k : ℚ) + 1)) :=
-    mul_le_mul_of_nonneg_left h_inv (mul_pos hkq hm1q).le
-  have heq1 : k * ((max M k : ℚ) + 1) * (1 / (k : ℚ)) = (max M k : ℚ) + 1 := by
-    field_simp
-  have heq2 : k * ((max M k : ℚ) + 1) * (1 / ((max M k : ℚ) + 1)) = k := by
-    field_simp
-  linarith [heq1 ▸ heq2 ▸ hmul]
+  have hpos : (0 : ℚ) < k * ((max M k : ℚ) + 1) := mul_pos hkq hm1q
+  have hscaled := mul_le_mul_of_nonneg_right hbound hpos.le
+  have lhs_eq : (1 - 1 / ((max M k : ℚ) + 1)) * (k * ((max M k : ℚ) + 1)) =
+      k * ((max M k : ℚ) + 1) - k := by field_simp [hm1q.ne']; ring
+  have rhs_eq : (1 - 1 / (k : ℚ)) * (k * ((max M k : ℚ) + 1)) =
+      k * ((max M k : ℚ) + 1) - ((max M k : ℚ) + 1) := by field_simp [hkq.ne']; ring
+  rw [lhs_eq, rhs_eq] at hscaled
+  linarith
 
 /-! ## Theorem N1 (headline): first-order non-descent -/
 
