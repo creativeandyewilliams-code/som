@@ -1,3 +1,5 @@
+import Mathlib
+import SomTail.Witness
 /-!
 # SomTail.UpperBound — L3: Decision of TAIL (Tier C)
 
@@ -9,8 +11,6 @@ and given the existential witness (the arithmetical-comprehension resource),
 the tail bit is decidable. This makes precise that arithmetical comprehension
 suffices — i.e. `ACA₀` decides `TAIL`.
 -/
-import Mathlib
-import SomTail.Witness
 
 namespace SomTail
 

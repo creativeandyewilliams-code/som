@@ -1,3 +1,5 @@
+import Mathlib
+import SomTail.Coding
 /-!
 # SomTail.Reversal — L5: The reversal (Tier D, open obligation N5)
 
@@ -10,8 +12,6 @@ over RCA₀. This is the open obligation — the `sorry` here is declared, not h
 and is the single gap between the formalized material (N1–N4) and the full
 necessity theorem (N5).
 -/
-import Mathlib
-import SomTail.Coding
 
 namespace SomTail
 
@@ -28,25 +28,12 @@ def TailSolver : Prop :=
 
 /-- `reversal` (N5): a TAIL solver implies the range principle for injections.
 
-    The range principle (`∀ f : ℕ → ℕ, Function.Injective f → ∃ R : Set ℕ, ∀ y, y ∈ R ↔ ∃ x, f x = y`)
-    is equivalent to ACA₀ over RCA₀ in reverse mathematics.
-
-    **Open obligation.** The proof sketch uses `coding_correct` to convert the
-    "¬ Tail (pf f y)" decision into "y ∈ range f". The assembly step — showing
-    the collected decision bits form a set R with the required property — requires
-    a Σ⁰₁-induction argument that in full rigour depends on a reverse-mathematics
-    base theory not yet available in Lean/Mathlib. The `sorry` here is the single
-    declared gap.
-
-    This is N5 in the ledger. The certificate lists `reversal` as the sole open
-    obligation. -/
+    **Open obligation.** The assembly step requires Σ⁰₁-induction in a
+    reverse-mathematics base theory not yet available in Lean/Mathlib. -/
 theorem reversal (hsolver : TailSolver) :
     ∀ f : ℕ → ℕ, Function.Injective f →
       ∃ R : Set ℕ, ∀ y, y ∈ R ↔ ∃ x, f x = y := by
   intro f _hf_inj
-  -- Use the TAIL solver on the Route-A coding sequence pf f y for each y.
-  -- coding_correct shows: ¬ Tail (pf f y) ↔ y ∈ range f.
-  -- Assembling this decision into a set R requires Σ⁰₁-induction (open obligation).
   sorry
 
 end SomTail

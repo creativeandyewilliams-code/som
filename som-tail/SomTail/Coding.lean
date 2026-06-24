@@ -1,3 +1,5 @@
+import Mathlib
+import SomTail.Witness
 /-!
 # SomTail.Coding — L4: Route-A coding reduction (Tier D)
 
@@ -8,8 +10,6 @@ and target `y`. The key theorem `coding_correct` shows that the tail condition f
 (no eventual rational gap below 1) precisely when `y` is in the range of `f`.
 This is the heart of the coding reduction.
 -/
-import Mathlib
-import SomTail.Witness
 
 namespace SomTail
 
@@ -39,11 +39,6 @@ lemma pf_eq_of_found (f : ℕ → ℕ) (y m : ℕ) (h : ∃ x ≤ m, f x = y) :
     pf f y m = 1 - 1 / ((m : ℚ) + 1) := by
   simp only [pf, h, if_true]
 
-lemma pf_eq_zero_of_not_found (f : ℕ → ℕ) (y m : ℕ) (h : ¬∃ x ≤ m, f x = y) :
-    pf f y m = 0 := by
-  simp only [pf, h, if_false]
-
-/-- Once `y` appears in `range f` by step `x₀`, it stays found at all later steps. -/
 lemma found_mono (f : ℕ → ℕ) (y : ℕ) (x₀ : ℕ) (hx₀ : f x₀ = y) :
     ∀ m ≥ x₀, ∃ x ≤ m, f x = y :=
   fun m hm => ⟨x₀, hm, hx₀⟩
@@ -51,44 +46,27 @@ lemma found_mono (f : ℕ → ℕ) (y : ℕ) (x₀ : ℕ) (hx₀ : f x₀ = y) :
 /-! ## Tier D theorem: coding correctness (N4) -/
 
 /-- `coding_correct` (N4): the tail's failure mode (no eventual rational gap below 1)
-    holds if and only if `y` is in the range of `f`.
-
-    - `(→)` If the tail fails, then for every gap size 1/k and starting index M,
-      some step m ≥ M has `pf f y m > 1 - 1/k`. For k = 1 this means `pf f y m > 0`,
-      which requires a witness x ≤ m with f x = y.
-
-    - `(←)` If y ∈ range f, then from step x₀ onward `pf f y m = 1 - 1/(m+1) → 1`,
-      which surpasses every threshold `1 - 1/k` for large enough m. -/
+    holds if and only if `y` is in the range of `f`. -/
 theorem coding_correct (f : ℕ → ℕ) (y : ℕ) :
     (¬ ∃ k : ℕ, 0 < k ∧ ∃ M : ℕ, ∀ m ≥ M, pf f y m ≤ 1 - 1 / (k : ℚ))
       ↔ (∃ x, f x = y) := by
   constructor
-  · -- (→): ¬ Tail → y ∈ range f.
-    intro hnt
+  · intro hnt
     push_neg at hnt
-    -- For k = 1: every starting index M has some m ≥ M with pf f y m > 0.
     have h1 : ∀ M : ℕ, ∃ m ≥ M, pf f y m > 1 - 1 / (1 : ℚ) := hnt 1 one_pos
     simp only [Nat.cast_one, div_one, sub_self] at h1
-    -- Get a specific m where pf f y m > 0.
     obtain ⟨m, _, hm_pos⟩ := h1 0
-    -- pf f y m > 0 iff ∃ x ≤ m, f x = y.
     rw [pf_pos_iff] at hm_pos
     exact ⟨hm_pos.choose, hm_pos.choose_spec.2⟩
-  · -- (←): y ∈ range f → ¬ Tail.
-    intro ⟨x₀, hx₀⟩ ⟨k, hk, M, hM⟩
-    -- From step max M x₀ onward, pf f y m = 1 - 1/(m+1).
-    -- At m = max (max M x₀) k, the bound 1 - 1/(m+1) > 1 - 1/k contradicts hM.
+  · intro ⟨x₀, hx₀⟩ ⟨k, hk, M, hM⟩
     set m := max (max M x₀) k with hm_def
     have hm_M : m ≥ M := Nat.le_trans (Nat.le_max_left M x₀) (Nat.le_max_left _ k)
     have hm_x₀ : m ≥ x₀ := Nat.le_trans (Nat.le_max_right M x₀) (Nat.le_max_left _ k)
     have hm_k : m ≥ k := Nat.le_max_right _ k
-    -- Compute pf f y m = 1 - 1/(m+1)
     have hpf : pf f y m = 1 - 1 / ((m : ℚ) + 1) :=
       pf_eq_of_found f y m (found_mono f y x₀ hx₀ m hm_x₀)
-    -- The bound from hM
     have hbound := hM m hm_M
     rw [hpf] at hbound
-    -- Derive contradiction: 1 - 1/(m+1) ≤ 1 - 1/k, but m ≥ k implies 1/(m+1) < 1/k.
     have hkq : (0 : ℚ) < (k : ℚ) := Nat.cast_pos.mpr hk
     have hm1q : (0 : ℚ) < (m : ℚ) + 1 := by positivity
     have hmkq : (k : ℚ) ≤ (m : ℚ) := Nat.cast_le.mpr hm_k

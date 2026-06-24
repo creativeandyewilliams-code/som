@@ -1,3 +1,4 @@
+import Mathlib
 /-!
 # SomTail.Witness — L1: First-order non-descent witness (Tier A)
 
@@ -11,7 +12,6 @@ The tail predicate is given here in its elementary Σ⁰₂ form (an explicit
 `∃ k ∃ M ∀ m` condition on the rational proximity sequence). Equivalence to the
 `Filter.limsup` form is proved in `SomTail.Complexity`.
 -/
-import Mathlib
 
 namespace SomTail
 
@@ -83,12 +83,10 @@ lemma o_iter_xB (k : ℕ) : o (T^[k] xB) = true := by simp [xB, o]
     imply equal finite truncations. -/
 theorem trunc_factors (n : ℕ) (x y : X) (h : qFin n x = qFin n y) :
     PhiTrunc n x = PhiTrunc n y := by
-  -- Key: Phi = o, so PhiTrunc n z = (qFin n z).all id for every z.
   suffices key : ∀ z : X, PhiTrunc n z = (qFin n z).all id by
     rw [key, key, h]
   intro z
   simp only [PhiTrunc, qFin, Phi, o]
-  -- Now both sides are list-all of the same function; use all_map.
   induction (List.range (n + 1)) with
   | nil => simp
   | cons a t ih =>
@@ -101,23 +99,18 @@ theorem trunc_factors (n : ℕ) (x y : X) (h : qFin n x = qFin n y) :
     history but differing at step n+1. -/
 theorem tower_refines (n : ℕ) :
     ∃ x y : X, qFin n x = qFin n y ∧ qFin (n + 1) x ≠ qFin (n + 1) y := by
-  -- Witness: x₀ has stream `decide (· ≤ n)`, x₁ has stream `fun _ => true`.
   refine ⟨(false, fun i => decide (i ≤ n), 0), (false, fun _ => true, 0), ?_, ?_⟩
-  · -- Equal n-step histories: both observe `true` for steps 0..n.
-    simp only [qFin, o, T_iter, zero_add]
+  · simp only [qFin, o, T_iter, zero_add]
     apply List.map_congr
     intro k hk
     simp only [List.mem_range] at hk
     simp [Nat.le_of_lt_succ hk]
-  · -- Different (n+1)-step histories: x₀ has false at step n+1, x₁ has true.
-    simp only [qFin, o, T_iter, zero_add, ne_eq]
+  · simp only [qFin, o, T_iter, zero_add, ne_eq]
     intro h
-    -- false ∈ LHS (from step n+1 where decide (n+1 ≤ n) = false)
     have hmem_lhs : false ∈ (List.range (n + 2)).map (fun k => decide (k ≤ n)) := by
       apply List.mem_map.mpr
       exact ⟨n + 1, List.mem_range.mpr (Nat.lt_succ_self _), by
         simp [decide_eq_false_iff_not, Nat.not_succ_le_self]⟩
-    -- false ∉ RHS (all entries are true)
     have hmem_rhs : false ∉ (List.range (n + 2)).map (fun _ => true) := by
       simp [List.mem_map]
     rw [h] at hmem_lhs
@@ -139,14 +132,11 @@ theorem tail_xA : Tail xA := by
 
 theorem tail_xB : ¬ Tail xB := by
   intro ⟨k, hk, M, hM⟩
-  -- Apply the bound at m = max M k, which is ≥ M.
   have hbound := hM (max M k) (le_max_left M k)
   rw [p_iter_xB] at hbound
-  -- Rational arithmetic: 1 - 1/(max M k + 1) ≤ 1 - 1/k implies k ≤ max M k, but also k+1 ≤ k.
   have hmk : k ≤ max M k := le_max_right M k
   have hkq : (0 : ℚ) < (k : ℚ) := Nat.cast_pos.mpr hk
   have hm1q : (0 : ℚ) < (max M k : ℚ) + 1 := by positivity
-  -- From hbound: 1/k ≤ 1/(max M k + 1), i.e. max M k + 1 ≤ k. Contradicts hmk.
   have h_inv : 1 / (k : ℚ) ≤ 1 / ((max M k : ℚ) + 1) := by linarith
   have h_lt : (k : ℚ) < (max M k : ℚ) + 1 := by exact_mod_cast Nat.lt_succ_of_le hmk
   have h_anti : (max M k : ℚ) + 1 ≤ k := by
