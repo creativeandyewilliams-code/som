@@ -33,8 +33,9 @@ theorem debt_diverges (demand cap : ℕ → ℤ) (ε : ℤ) (hε : 0 < ε)
   | zero => simp [debtSeq]
   | succ n ih =>
     simp only [debtSeq, debtStep]
-    have hstep : debtSeq demand cap n + demand n - cap n ≥ (n + 1) * ε := by
+    have hstep : debtSeq demand cap n + demand n - cap n ≥ (↑n + 1) * ε := by
       have := hmargin n; linarith
+    have hcast : (↑(n + 1) : ℤ) = ↑n + 1 := by push_cast; ring
     linarith [le_max_right 0 (debtSeq demand cap n + demand n - cap n)]
 
 /-- Sufficient repair: if the quotient lies within capacity, debt does not grow. -/

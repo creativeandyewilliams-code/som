@@ -8,7 +8,7 @@ Audit family, audit equivalence, and coarsest audit-faithful quotient.
 namespace SomControlV11.MSpace
 
 /-- An audit family on P: a set of Bool-valued audit functions. -/
-def AuditFamily (P : Type*) := Set (P → Bool)
+abbrev AuditFamily (P : Type*) := Set (P → Bool)
 
 /-- Audit equivalence: p ~ q iff every auditor returns the same output. -/
 def AuditEq {P : Type*} (A : AuditFamily P) (p q : P) : Prop :=

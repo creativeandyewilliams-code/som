@@ -45,10 +45,10 @@ theorem in_range_atOne (f : ℕ → ℕ) (y : ℕ) (hy : ∃ x₀, f x₀ = y) :
   rw [a_f_found _ _ _ hfound, gt_iff_lt, sub_lt_sub_iff_left]
   have h2k : (0 : ℚ) < (2 : ℚ)^k := by positivity
   have hm1 : (0 : ℚ) < (m : ℚ) + 1 := by positivity
-  rw [div_lt_div_iff hm1 h2k, one_mul, one_mul]
-  have : (2^k : ℚ) ≤ (m : ℚ) := by
-    exact_mod_cast Nat.le_max_right (max M x₀) (2^k)
-  linarith
+  have h2k_lt_m1 : (2 : ℚ)^k < (m : ℚ) + 1 := by
+    have h2k_le : (2 : ℕ)^k ≤ m := Nat.le_max_right (max M x₀) (2^k)
+    exact_mod_cast Nat.lt_succ_of_le h2k_le
+  exact (one_div_lt_one_div_iff h2k).mpr h2k_lt_m1
 
 /-- y ∉ ran(f) implies a_f(y,·) satisfies Below with dyadic threshold. -/
 theorem not_in_range_below (f : ℕ → ℕ) (y : ℕ) (hy : ¬ ∃ x₀, f x₀ = y) :
