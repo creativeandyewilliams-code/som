@@ -10,6 +10,7 @@ import SomControlV11.Ledger.DebtRecurrence
 import SomControlV11.Ledger.CapacityDominance
 import SomControlV11.Derivation.NoveltySeparation
 import SomControlV11.Derivation.AuditEquivalentNecessity
+import SomControlV11.PSpace.GenericAspectAudit
 
 /-!
 # SomControlV11.Release.V11Claims
@@ -36,12 +37,13 @@ Build command:
 - Audit-equivalent necessity (Below not obs-computable)          [Derivation.AuditEquivalentNecessity]
 - No Bool-valued observation classifier for Below                [Derivation.AuditEquivalentNecessity]
 - No finite-history classifier for any depth n                   [Derivation.AuditEquivalentNecessity]
+- Generic aspect-audit separation (auditor-distinct => quot-distinct) [PSpace.GenericAspectAudit]
 
 ## Pending (proof holes present — excluded from release graph)
 - R³ edge-separated embedding (moment curve / Vandermonde)       [Visual.R3Embedding]
 - K₅ lower-bound obstruction (planarity)                        [Visual.PlanarityObstruction]
 - UGapTail <-> ACA0 (Level B: requires formalized RCA0 metatheory) [ReverseMath.ACA0Equivalence]
-- Generic P-space aspect-audit theorem                           [PSpace.GenericAspectAudit]
+- Quotient topology / metrizability for P-space audit quotient   [PSpace level B]
 
 ## Not formalized (empirical bridge)
 - Corpus forecasts, human performance claims, repository ledger
@@ -94,10 +96,14 @@ alias debt_stable_when_within_capacity := SomControlV11.Ledger.debt_stable_when_
 alias auditQuot_capacity_dominance      := SomControlV11.Ledger.auditQuot_capacity_dominance
 
 -- Derivation
-alias novelty_separation          := SomControlV11.Derivation.novelty_separation
-alias no_obs_separator            := SomControlV11.Derivation.no_obs_separator
-alias audit_equivalent_necessity  := SomControlV11.Derivation.audit_equivalent_necessity
-alias no_bool_classifier          := SomControlV11.Derivation.no_bool_classifier
+alias novelty_separation           := SomControlV11.Derivation.novelty_separation
+alias no_obs_separator             := SomControlV11.Derivation.no_obs_separator
+alias audit_equivalent_necessity   := SomControlV11.Derivation.audit_equivalent_necessity
+alias no_bool_classifier           := SomControlV11.Derivation.no_bool_classifier
 alias no_finite_history_classifier := SomControlV11.Derivation.no_finite_history_classifier
+
+-- PSpace
+alias generic_aspect_audit    := SomControlV11.PSpace.generic_aspect_audit
+alias auditEq_implies_quot_eq := SomControlV11.PSpace.auditEq_implies_quot_eq
 
 end SomControlV11.Release

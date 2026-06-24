@@ -3,15 +3,16 @@ import SomControlV11.MSpace.AuditFamily
 
 /-!
 # SomControlV11.PSpace.GenericAspectAudit
-Generic P-space aspect-audit theorem (excluded from release graph).
+Generic aspect-audit separation theorem.
 
-For a generic compact metrizable control state space P, every continuous
-audit family generates an audit quotient that is a compact metrizable space,
-and the aspect-audit separation theorem holds: states that agree on all
-audit functions lie in the same audit class.
+If two states p, q in a topological space P are separated by some auditor
+in the audit family A (i.e., some f ∈ A satisfies f p ≠ f q), then their
+audit quotient images are distinct. This is the separation direction of
+audit-equivalence: the audit quotient does not collapse auditor-distinct states.
 
-**Status: PENDING** — requires functional analysis and compactness machinery
-beyond what is formalized here; excluded from release graph.
+Note: The converse (if audit-equivalent then quotient-identified) is definitional.
+The full continuity/compactness theory for the quotient topology is a separate
+pending project (Level B).
 -/
 
 namespace SomControlV11.PSpace
@@ -23,20 +24,22 @@ def ContinuousAuditFamily {P : Type*} [TopologicalSpace P]
     (A : AuditFamily P) : Prop :=
   ∀ f ∈ A, Continuous f
 
-/-- Generic aspect-audit theorem: for a compact metrizable space P with a
-    continuous audit family A, the audit quotient separates points that differ
-    on some auditor.
+/-- Generic aspect-audit separation: if p and q are separated by some auditor,
+    their audit quotient images are distinct.
 
-    **Open obligation**: the quotient topology and metrizability of the quotient
-    space under the separation axioms are not yet assembled here. -/
-theorem generic_aspect_audit {P : Type*} [TopologicalSpace P]
-    [CompactSpace P] [MetrizableSpace P]
-    (A : AuditFamily P) (hA : ContinuousAuditFamily A)
+    This is the point-separation direction of the audit quotient construction:
+    the quotient faithfully remembers all auditor distinctions. -/
+theorem generic_aspect_audit {P : Type*}
+    (A : AuditFamily P)
     (p q : P) (h : ∃ f ∈ A, f p ≠ f q) :
     auditQuot A p ≠ auditQuot A q := by
   intro heq
   obtain ⟨f, hf, hfpq⟩ := h
-  have := Quotient.exact heq
-  exact hfpq (this f hf)
+  exact hfpq (Quotient.exact heq f hf)
+
+/-- Converse direction (definitional): audit-equivalent states map to the same quotient point. -/
+theorem auditEq_implies_quot_eq {P : Type*} (A : AuditFamily P) {p q : P}
+    (h : AuditEq A p q) : auditQuot A p = auditQuot A q :=
+  Quotient.sound h
 
 end SomControlV11.PSpace

@@ -34,6 +34,7 @@ jobs:
               SomControlV11/MSpace \
               SomControlV11/Ledger \
               SomControlV11/Derivation \
+              SomControlV11/PSpace \
               SomControlV11/Release 2>/dev/null; then
             echo "ERROR: sorry or admit found in release graph"
             exit 1

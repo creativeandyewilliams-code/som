@@ -19,6 +19,7 @@ theorem auditQuot_is_coarsest {P R : Type*} (A : AuditFamily P) (r : P → R)
 /-- Finite-population information bound: the quotient partitions a finite population. -/
 theorem auditQuot_finite_partition {P : Type*} [Fintype P] (A : AuditFamily P) :
     Fintype.card (Quotient (auditEqSetoid A)) ≤ Fintype.card P :=
-  Fintype.card_quotient_le _
+  Fintype.card_le_of_surjective (Quotient.mk (auditEqSetoid A))
+    (Quotient.surjective_Quotient_mk (auditEqSetoid A))
 
 end SomControlV11.MSpace
