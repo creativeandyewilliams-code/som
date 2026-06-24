@@ -1,0 +1,1196 @@
+%=================================================================
+% Observation Quotients, Orbit Predicates, and the Derivability of
+% Control Limits -- Version 11
+%=================================================================
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{mathrsfs}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,longtable}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,capitalise]{cleveref}
+
+\setlength{\parskip}{0.42em}
+\setlength{\parindent}{0pt}
+\setlist{itemsep=0.25em,topsep=0.35em}
+
+%================== macros ==================
+\newcommand{\Bbits}{\ensuremath{\{0,1\}}}
+\newcommand{\Xspace}{\ensuremath{X}}
+\newcommand{\Endo}{\ensuremath{T}}
+\newcommand{\Obs}{\ensuremath{O}}
+\newcommand{\Tail}{\ensuremath{\Psi}}
+\newcommand{\Pred}{\ensuremath{\phi}}
+\newcommand{\Diag}{\ensuremath{\mathsf{Diag}}}
+\newcommand{\DOne}{\ensuremath{\mathsf{D1}}}
+\newcommand{\DTwo}{\ensuremath{\mathsf{D2}}}
+\newcommand{\DThree}{\ensuremath{\mathsf{D3}}}
+\newcommand{\RCA}{\ensuremath{\mathsf{RCA}_0}}
+\newcommand{\ACA}{\ensuremath{\mathsf{ACA}_0}}
+\newcommand{\UGapTail}{\ensuremath{\mathsf{UGapTail}}}
+\newcommand{\Mspace}{\ensuremath{\mathcal M}}
+\newcommand{\Lib}{\ensuremath{\mathcal L}}
+\newcommand{\Arch}{\ensuremath{\mathcal A}}
+\newcommand{\Inv}{\ensuremath{\mathcal I}}
+\newcommand{\FNovel}{\ensuremath{\mathsf{FNovel}}}
+\newcommand{\Base}{\ensuremath{\mathfrak B}}
+\newcommand{\Task}{\ensuremath{\mathsf Q}}
+\newcommand{\im}{\ensuremath{\operatorname{im}}}
+\newcommand{\ran}{\ensuremath{\operatorname{ran}}}
+\newcommand{\Dec}{\ensuremath{\operatorname{Dec}}}
+\newcommand{\Proofs}{\ensuremath{\mathsf{Prf}}}
+\newcommand{\MInf}{\ensuremath{\mathcal M_\infty}}
+\newcommand{\MEnc}{\ensuremath{\mathsf{Enc}}}
+\newcommand{\MDec}{\ensuremath{\mathsf{Dec}}}
+\newcommand{\AuditQuot}{\ensuremath{q_{\mathcal A}}}
+\newcommand{\AuditEq}{\ensuremath{\sim_{\mathcal A}}}
+\newcommand{\Rthree}{\ensuremath{\mathbb R^3}}
+\newcommand{\Ledger}{\ensuremath{\mathscr L}}
+\newcommand{\Debt}{\ensuremath{B}}
+\newcommand{\Demand}{\ensuremath{W}}
+\newcommand{\AuditCap}{\ensuremath{K}}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{construction}[theorem]{Construction}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{warning}[theorem]{Warning}
+
+\hypersetup{
+ pdftitle={Observation Quotients, Orbit Predicates, and the Derivability of Control Limits: Version 11},
+ pdfauthor={Andy E. Williams}
+}
+
+\title{Observation Quotients, Orbit Predicates, and the\\
+Derivability of Control Limits\\[3pt]
+\large A Typed Second-Order Diagnostic, an Exact Uniform\\
+Reverse-Mathematical Principle, Universal M-Space Proof Architecture, and\
+\large a Collective Proof-Audit Capacity Criterion}
+\author{Andy E. Williams\thanks{Correspondence: info@cc4ci.org}\\[3pt]
+\small Caribbean Center for Collective Intelligence, St.~John's, Antigua and Barbuda\\
+\small Nobeah Foundation, Nairobi, Kenya}
+\date{2026 -- Version 11}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a declared observation map, a Boolean orbit target is decidable from the
+available information exactly when it is constant on the observation fibers.  We
+prove this criterion and construct a strictly refining observation-history tower
+in which every finite monitoring predicate is decidable at its corresponding
+finite stage while a distinct shift-invariant orbit target is not decidable even
+from the full observation history.  The construction yields a finite paired
+certificate of this non-descent.
+
+The resulting contribution is a typed diagnostic acting on a declared binding of
+an observation channel, an orbit target, and an evidence object.  A descent
+certificate yields status $\DOne$; a finite equal-observation, unequal-target
+pair yields $\DTwo$; and an incomplete record yields $\DThree$.  We prove that
+this diagnostic does not factor through a component projection that preserves
+available ingredients while forgetting which channel--target--certificate
+binding is under assessment.
+
+We also define the class of communicable purely mathematical proof witnesses and
+prove that every member has an exact representation in a finite level of an
+M-space proof tower.  Relative to a declared audit family, the associated audit
+quotient is the coarsest audit-faithful representation, hence maximally
+compressive in the task-relative sense that a theorem can support.  Every finite
+proof-dependency graph has an edge-separated realization in $\mathbb R^3$, and
+three is the least universal Euclidean display dimension for that class.  Under
+an explicit finite-interface audit model and a declared finite admissible
+projection plan, the quotient is structurally auditable through a finite indexed
+record of coherent three-dimensional views.  For graph-shaped proof content,
+the record reduces to one view only when the full labelled incidence display lies
+within the declared interface bound; the unconditional graph result remains a
+geometric realization theorem.  Finally, a novelty-separated derivational
+problem admits no reliable solution through a channel family that collapses
+target-distinct states; any reliable replacement must retain an
+audit-equivalent refinement.  We also formalize a time-indexed proof-audit
+ledger.  Under a declared audit-cost monotonicity condition, the audit quotient
+weakly minimizes audit demand among audit-faithful representations; persistent
+audit demand above available capacity forces unbounded unresolved audit debt.
+If the quotient itself lies within capacity, replacing a higher-demand faithful
+representation by the quotient is a sufficient representation-level repair.
+A separate preregistered corpus and interface protocol is the empirical bridge
+for whether these formal quantities forecast real repository burden or improve
+human task performance.
+
+Separately, we formulate the uniform gap-tail principle $\UGapTail$ and prove,
+over $\RCA$, that $\UGapTail\leftrightarrow\ACA$.  The quotient, temporal,
+binding, proof-architecture, and reverse-mathematical results are distinct
+formal claims.  Application and physical interpretations remain bridge-required.
+\end{abstract}
+
+\noindent\textbf{Keywords:} observation quotient; factorization; orbit predicate;
+finite monitoring; tail decision; reverse mathematics; arithmetical
+comprehension; diagnostic binding; M-space; proof representation; audit quotient;
+three-dimensional visualization; novelty-separated derivation.
+
+\section{Motivation, scope, and result type}
+\label{sec:intro}
+
+A finite sequence of observations may support every declared finite monitoring
+judgment while remaining insufficient for a different, long-run orbit judgment.
+The mathematical question is prior to any application-specific decision:
+\begin{quote}
+Given a declared observation representation and a declared orbit predicate, does
+the predicate descend through that representation?
+\end{quote}
+
+This paper answers that question at four levels.  First, it gives the general
+fiber criterion.  Second, it gives a temporal witness separating finite
+monitoring from an independently typed orbit target.  Third, it formalizes a
+diagnostic whose inputs include a representation, a target, and a certificate.
+Fourth, it applies the same descent discipline to communicable mathematical
+proofs, their audit quotients, and their human-facing visual realizations.
+Fifth, it separates a formal proof-audit capacity criterion from the empirical
+question of whether source-visible mathematical corpora exhibit such capacity
+bottlenecks.  The diagnostic is second order in the representational sense: it
+acts on an assessment record rather than on a raw state alone.
+
+The paper uses ``second-order'' in one additional, explicitly separate sense:
+second-order arithmetic.  The reverse-mathematical theorem concerns only the
+uniform principle $\UGapTail$ stated in Section~\ref{sec:reverse}; it does not
+assert that every tail problem, application, or physical system requires
+$\ACA$.  The M-space theorem package is likewise sharply typed: it concerns
+finitely communicable proof witnesses, audit-relative compression, and
+structural audit, rather than arbitrary semantic truth, literal notation, or an
+unmodeled universal psychology of mathematical understanding.
+
+\begin{remark}[Removal test]
+All theorem statements and proofs below are independent of any proposed
+application.  The bridge record of Section~\ref{sec:bridge} identifies what an
+application would have to supply; it contributes no premise to the formal core.
+\end{remark}
+
+\section{Quotient decidability}
+\label{sec:quotient}
+
+\begin{definition}[Decidability through a representation]
+Let $q:\Xspace\to Z$ and $\Tail:\Xspace\to\Bbits$.  Write
+\[
+\Dec_q(\Tail)
+\]
+when there exists a map $\overline\Tail:\im(q)\to\Bbits$ such that
+\[
+\Tail=\overline\Tail\circ q.
+\]
+The codomain is $\im(q)$, so no surjectivity convention is required.
+\end{definition}
+
+\begin{theorem}[Fiber criterion]
+\label{thm:fiber}
+For $q:\Xspace\to Z$ and $\Tail:\Xspace\to\Bbits$,
+\[
+\Dec_q(\Tail)
+\quad\Longleftrightarrow\quad
+\forall x,y\in\Xspace\;\bigl(q(x)=q(y)\Longrightarrow\Tail(x)=\Tail(y)\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+If $\Tail=\overline\Tail\circ q$, equal $q$-values give equal target values.
+Conversely, suppose $\Tail$ is constant on every $q$-fiber.  For
+$z\in\im(q)$ choose $x$ with $q(x)=z$ and set
+$\overline\Tail(z)=\Tail(x)$.  Fiber constancy makes this definition
+independent of the chosen representative, and then
+$\Tail=\overline\Tail\circ q$.
+\end{proof}
+
+\begin{definition}[Paired non-descent certificate]
+A paired non-descent certificate for $(q,\Tail)$ is a pair $(x,y)\in\Xspace^2$
+with
+\[
+q(x)=q(y)
+\qquad\text{and}\qquad
+\Tail(x)\neq\Tail(y).
+\]
+\end{definition}
+
+\begin{corollary}[Finite separation]
+A paired non-descent certificate proves $\neg\Dec_q(\Tail)$.
+\end{corollary}
+
+\begin{proof}
+It violates the right-hand side of Theorem~\ref{thm:fiber}.
+\end{proof}
+
+\begin{definition}[Decision partition]
+For $\Tail:\Xspace\to\Bbits$, let
+\[
+x\equiv_{\Tail}y\quad\Longleftrightarrow\quad\Tail(x)=\Tail(y).\]
+A representation $r:\Xspace\to R$ is decision-sufficient for $\Tail$ when
+$\Dec_r(\Tail)$ holds.
+\end{definition}
+
+\begin{proposition}[Coarsest decision partition]
+\label{prop:coarsest}
+The quotient map $x\mapsto[x]_{\equiv_\Tail}$ is decision-sufficient for
+$\Tail$.  If $r$ is decision-sufficient for $\Tail$, then
+\[
+r(x)=r(y)\Longrightarrow\Tail(x)=\Tail(y).
+\]
+Thus the truth partition of $\Tail$ is the coarsest partition sufficient to
+decide $\Tail$.
+\end{proposition}
+
+\begin{proof}
+The map $[x]_{\equiv_\Tail}\mapsto\Tail(x)$ is well defined.  If
+$\Tail=d\circ r$, then $r(x)=r(y)$ implies
+$\Tail(x)=d(r(x))=d(r(y))=\Tail(y)$.
+\end{proof}
+
+\begin{remark}[Scope]
+Proposition~\ref{prop:coarsest} is a partition theorem.  It is not a memory
+lower bound, an orbit-storage theorem, or an empirical claim about a controller.
+\end{remark}
+
+\section{Finite monitoring and independent orbit targets}
+\label{sec:temporal}
+
+\begin{definition}[History tower]
+A history tower is a triple $(\Xspace,\Endo,o)$ with
+\[
+\Endo:\Xspace\to\Xspace,\qquad o:\Xspace\to\Obs.
+\]
+For $n\in\mathbb N$, set
+\[
+q_n(x)=\bigl(o(x),o(\Endo x),\ldots,o(\Endo^n x)\bigr),
+\qquad
+q_\infty(x)=\bigl(o(\Endo^m x)\bigr)_{m\in\mathbb N}.
+\]
+\end{definition}
+
+\begin{definition}[Finite monitoring and orbit target]
+Let $\Pred:\Xspace\to\Bbits$.  Define
+\[
+P_n(x)=1\quad\Longleftrightarrow\quad
+\forall k\leq n\;\Pred(\Endo^k x)=1.
+\]
+An orbit target is a shift-invariant map $\Tail:\Xspace\to\Bbits$ satisfying
+$\Tail(\Endo x)=\Tail(x)$.  No equality between $\Tail$ and a limit of the
+$P_n$ is assumed.
+\end{definition}
+
+\begin{warning}[Two predicate families]
+A fixed predicate that descends through every $q_n$ necessarily descends through
+$q_\infty$, because each $q_n$ is a function of $q_\infty$.  The theorem below
+therefore concerns two distinct families: the finite predicates $P_n$ and an
+independently typed orbit target $\Tail$.
+\end{warning}
+
+\begin{theorem}[Rich temporal non-descent]
+\label{thm:rich}
+There exist a history tower $(\Xspace,\Endo,o)$, a local predicate $\Pred$, and
+a shift-invariant target $\Tail$ such that:
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=2.6em]
+\item $P_n$ descends through $q_n$ for every $n$;
+\item $q_{n+1}$ strictly refines $q_n$ for every $n$; and
+\item $\Tail$ does not descend through $q_\infty$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+\Xspace=\{A,B\}\times\Bbits^{\mathbb N}\times\mathbb N,
+\]
+with elements $(\theta,s,i)$ and $s=(s_0,s_1,\ldots)$.  Set
+\[
+\Endo(\theta,s,i)=(\theta,s,i+1),\qquad
+ o(\theta,s,i)=s_i,\qquad
+\Pred(\theta,s,i)=s_i.
+\]
+Then
+\[
+q_n(\theta,s,i)=(s_i,\ldots,s_{i+n})
+\]
+and
+\[
+P_n(\theta,s,i)=1\quad\Longleftrightarrow\quad
+s_i=\cdots=s_{i+n}=1.
+\]
+Thus $P_n=\overline P_n\circ q_n$, where $\overline P_n$ tests whether every
+coordinate is $1$.  Strict refinement follows by choosing two streams agreeing
+on indices $i,\ldots,i+n$ and differing at $i+n+1$.
+
+Define
+\[
+p(A,s,i)=0,\qquad p(B,s,i)=1-\frac{1}{i+1},
+\]
+and
+\[
+\Tail(x)=1\quad\Longleftrightarrow\quad
+\limsup_{m\to\infty}p(\Endo^m x)<1.
+\]
+This is shift invariant.  For $\mathbf 1=(1,1,\ldots)$, put
+\[
+x_A=(A,\mathbf 1,0),\qquad x_B=(B,\mathbf 1,0).
+\]
+Then $q_\infty(x_A)=q_\infty(x_B)=\mathbf 1$, whereas
+$\Tail(x_A)=1$ and $\Tail(x_B)=0$.  Theorem~\ref{thm:fiber} gives
+$\neg\Dec_{q_\infty}(\Tail)$.
+\end{proof}
+
+\begin{corollary}[History-derived representations cannot repair non-descent]
+\label{cor:derived}
+In the witness of Theorem~\ref{thm:rich}, if $r=g\circ q_\infty$ for some map
+$g$, then $\neg\Dec_r(\Tail)$.
+\end{corollary}
+
+\begin{proof}
+The states $x_A$ and $x_B$ have equal $r$-values and unequal target values.
+\end{proof}
+
+\begin{definition}[Deterministic finite-state controller]
+For an observation alphabet $O$, a deterministic finite-state controller is a
+finite set $S$, an initial state $s_0\in S$, an update map
+$u:S\times O\to S$, and an output map $v:S\to\Bbits$.  On the orbit of $x$,
+its state sequence is
+\[
+s_{m+1}=u\bigl(s_m,o(T^m x)\bigr).
+\]
+It decides an orbit target $\Psi$ in the eventual-output sense when, for every
+$x$, there is $N$ such that $v(s_m)=\Psi(x)$ for all $m\geq N$.
+\end{definition}
+
+\begin{corollary}[Finite-state impossibility for the declared channel]
+No deterministic finite-state controller reading the raw observations of the
+witness in Theorem~\ref{thm:rich} decides $\Psi$ in the eventual-output sense.
+\end{corollary}
+
+\begin{proof}
+The inputs generated by $x_A$ and $x_B$ are the same infinite binary stream.
+A deterministic controller therefore has the same state and output sequence on
+both states.  That common sequence cannot eventually equal both
+$\Psi(x_A)=1$ and $\Psi(x_B)=0$.
+\end{proof}
+
+\begin{remark}[Accumulating history versus finite memory]
+The history $q_\infty$ is an unbounded record, whereas a finite-state controller
+has bounded internal memory.  The history-derived non-repair corollary is the
+stronger information restriction; the finite-state result makes the operational
+consequence explicit without converting the coarsest decision partition into a
+literal memory theorem.
+\end{remark}
+
+\section{A repaired two-wall theorem}
+\label{sec:wall}
+
+\begin{definition}[Wall-valued target]
+A wall-valued orbit target is a map
+\[
+W:\Xspace\to\{\mathsf{safe},\mathsf{left},\mathsf{right}\}.
+\]
+Its Boolean safety collapse is
+\[
+\mathrm{Safe}_W(x)=1\quad\Longleftrightarrow\quad W(x)=\mathsf{safe}.
+\]
+\end{definition}
+
+\begin{proposition}[Boolean safety does not force wall separation]
+A representation sufficient for $\mathrm{Safe}_W$ need not distinguish
+$\mathsf{left}$ from $\mathsf{right}$.
+\end{proposition}
+
+\begin{proof}
+The representation $r=\mathrm{Safe}_W$ decides Boolean safety and places every
+failure state in its value-$0$ fiber.
+\end{proof}
+
+\begin{proposition}[Wall-valued targets force wall separation]
+\label{prop:wall}
+If $r:\Xspace\to R$ and $d:R\to\{\mathsf{safe},\mathsf{left},\mathsf{right}\}$
+satisfy $W=d\circ r$, then
+\[
+W(x)\neq W(y)\Longrightarrow r(x)\neq r(y).
+\]
+\end{proposition}
+
+\begin{proof}
+Equal $r$-values would give equal $W$-values after applying $d$.
+\end{proof}
+
+\begin{theorem}[Two-wall temporal witness]
+There is a history tower for which every $P_n$ descends through $q_n$, while a
+wall-valued target $W$ does not descend through $q_\infty$; every representation
+sufficient for $W$ separates the left and right failure walls.
+\end{theorem}
+
+\begin{proof}
+Use
+\[
+\Xspace=\{A,B_-,B_+\}\times\Bbits^{\mathbb N}\times\mathbb N
+\]
+with the same $\Endo$, $o$, and $\Pred$ as in Theorem~\ref{thm:rich}.  Define
+\[
+W(A,s,i)=\mathsf{safe},\quad
+W(B_-,s,i)=\mathsf{left},\quad
+W(B_+,s,i)=\mathsf{right}.
+\]
+The three states over $\mathbf 1$ have identical complete observed histories
+and different $W$-values, so $W$ fails to descend through $q_\infty$.  The final
+claim is Proposition~\ref{prop:wall}.
+\end{proof}
+
+\section{A diagnostic is a record-level object}
+\label{sec:diagnostic}
+
+\begin{definition}[Diagnostic evidence]
+For a pair $(q,\Tail)$, evidence is one of:
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=2.6em]
+\item a descent certificate $\overline\Tail$ with $\Tail=\overline\Tail\circ q$;
+\item a non-descent certificate $(x,y)$ with $q(x)=q(y)$ and $\Tail(x)\neq\Tail(y)$;
+\item an incomplete record $\bot$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Typed diagnostic record]
+A diagnostic record is
+\[
+R=(q,\Tail,e,B),
+\]
+where $q$ and $\Tail$ have a common domain, $e$ is evidence for $(q,\Tail)$,
+and $B$ states the assessment boundary.  Set
+\[
+\Diag(R)=
+\begin{cases}
+\DOne,&e\text{ is a valid descent certificate},\\
+\DTwo,&e\text{ is a valid non-descent certificate},\\
+\DThree,&e=\bot.
+\end{cases}
+\]
+\end{definition}
+
+\begin{proposition}[Diagnostic soundness]
+\label{prop:diagnostic}
+For a well-typed diagnostic record, $\DOne$ proves $\Dec_q(\Tail)$, $\DTwo$
+proves $\neg\Dec_q(\Tail)$, and $\DThree$ asserts only that the record
+contains neither certificate.
+\end{proposition}
+
+\begin{proof}
+The first two claims follow from the definitions and Theorem~\ref{thm:fiber}.
+The third follows because $\bot$ is a record status, not a negation of the
+existence of a decoder or separating pair.
+\end{proof}
+
+\begin{remark}[Excluded readings]
+None of $\DOne$, $\DTwo$, or $\DThree$ is a state-level regime, a claim about
+all possible representations, or a policy instruction.  In particular,
+$\DTwo$ says only that the declared channel is insufficient for the declared
+target.
+\end{remark}
+
+\section{Binding-sensitive order-two novelty}
+\label{sec:novelty}
+
+\begin{definition}[Component library and binding]
+Let $\Lib$ be the class of tuples
+\[
+L=(\Xspace,\Endo,\Pred,\Tail,q^0_\infty,q^1_\infty,x_A,x_B,e_0,e_1)
+\]
+where $e_0=(x_A,x_B)$ is a valid non-descent certificate for
+$(q^0_\infty,\Tail)$ and $e_1$ is a valid descent certificate for
+$(q^1_\infty,\Tail)$.  A binding is a tuple
+\[
+\beta=(q,\Tail,e,B).
+\]
+An assembled architecture is $A=(L,\beta)$; write $\Arch$ for the class of
+such architectures.  The component projection is
+\[
+\pi_{\mathrm{cmp}}:\Arch\to\Lib,\qquad
+\pi_{\mathrm{cmp}}(L,\beta)=L.
+\]
+\end{definition}
+
+\begin{construction}[Two bindings over one library]
+\label{con:bindings}
+Use Theorem~\ref{thm:rich}.  Let
+\[
+q^0_\infty(\theta,s,i)=(s_i,s_{i+1},\ldots),
+\qquad
+q^1_\infty(\theta,s,i)=(\theta,s_i,s_{i+1},\ldots).
+\]
+Let $e_0=(x_A,x_B)$ and define
+\[
+e_1(\theta,t)=
+\begin{cases}1,&\theta=A,\\0,&\theta=B.\end{cases}
+\]
+For the resulting library $L$, define
+\[
+A_0=(L,(q^0_\infty,\Tail,e_0,B)),\qquad
+A_1=(L,(q^1_\infty,\Tail,e_1,B)).
+\]
+\end{construction}
+
+\begin{theorem}[Binding-sensitive diagnostic non-factorization]
+\label{thm:binding}
+There is no map $d:\Lib\to\{\DOne,\DTwo,\DThree\}$ such that
+\[
+\Diag(A)=d\bigl(\pi_{\mathrm{cmp}}(A)\bigr)
+\]
+for both architectures $A_0$ and $A_1$ of Construction~\ref{con:bindings}.
+\end{theorem}
+
+\begin{proof}
+The pair $e_0$ yields $\Diag(A_0)=\DTwo$.  The decoder $e_1$ yields
+$\Diag(A_1)=\DOne$.  But
+$\pi_{\mathrm{cmp}}(A_0)=L=\pi_{\mathrm{cmp}}(A_1)$.  A factorization through
+$\pi_{\mathrm{cmp}}$ would therefore imply $\DTwo=\DOne$.
+\end{proof}
+
+\begin{definition}[Scoped order-two diagnostic]
+Relative to $\pi_{\mathrm{cmp}}$, a diagnostic has representational order two
+when it is defined on assembled architectures but does not factor through the
+component projection.
+\end{definition}
+
+\begin{corollary}[Scoped order-two status]
+The diagnostic of Theorem~\ref{thm:binding} has representational order two
+relative to $\pi_{\mathrm{cmp}}$.
+\end{corollary}
+
+\begin{definition}[Functional novelty]
+Let $\Task$ be a typed task, $\Inv$ a protected invariant family, and
+$\Base$ a declared baseline class.  The assertion
+\[
+\FNovel_{\Inv,\Base}(A,\Task)
+\]
+means that $A$ is well typed and invariant-preserving, realizes $\Task$ on its
+stated finite witness class, and that every baseline in $\Base$ fails the task
+on that class or exits $\Base$ by retaining a distinction excluded by the
+baseline definition.
+\end{definition}
+
+\begin{corollary}[Functional novelty relative to componentwise baselines]
+Let $\Base_{\mathrm{cmp}}$ consist of outputs that factor through
+$\pi_{\mathrm{cmp}}$.  With invariants consisting of common-domain typing,
+correct certificate attachment, and the $\DOne/\DTwo/\DThree$ semantics,
+$\{A_0,A_1\}$ is a finite non-substitutability witness for the diagnostic task.
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:binding} shows that every componentwise baseline returns one
+common output on $A_0,A_1$, while the correct outputs differ.
+\end{proof}
+
+\begin{remark}[Exact claim]
+This is a relative non-preservation result.  It does not claim that familiar
+components are individually novel, that unrestricted first-order formalisms
+cannot encode the construction, or that historical priority has been established.
+\end{remark}
+
+\section{An exact uniform reverse-mathematical principle}
+\label{sec:reverse}
+
+\begin{definition}[Gap-tail formulas]
+For a coded rational array $a:\mathbb N^2\to\mathbb Q\cap[0,1]$, write
+\[
+\mathrm{Below}(a,e)\;\Longleftrightarrow\;
+\exists k\,\exists M\,\forall m\geq M\;
+\bigl(a(e,m)\leq1-2^{-k}\bigr),
+\]
+\[
+\mathrm{AtOne}(a,e)\;\Longleftrightarrow\;
+\forall k\,\forall M\,\exists m\geq M\;
+\bigl(a(e,m)>1-2^{-k}\bigr),
+\]
+and
+\[
+\mathrm{Gap}(a,e)\;\Longleftrightarrow\;
+\mathrm{Below}(a,e)\vee\mathrm{AtOne}(a,e).
+\]
+On a gap-promised row, the two cases express respectively
+$\limsup_m a(e,m)<1$ and $\limsup_m a(e,m)=1$.
+\end{definition}
+
+\begin{definition}[Uniform gap-tail decision principle]
+\[
+\UGapTail:\quad
+\forall a\left[
+\bigl(\forall e\;\mathrm{Gap}(a,e)\bigr)
+\Longrightarrow
+\exists Y\subseteq\mathbb N\;\forall e\;
+\bigl(e\in Y\Longleftrightarrow\mathrm{Below}(a,e)\bigr)
+\right].
+\]
+\end{definition}
+
+\begin{theorem}[Exact strength]
+\label{thm:ugap}
+Over $\RCA$,
+\[
+\UGapTail\quad\Longleftrightarrow\quad\ACA.
+\]
+\end{theorem}
+
+\begin{proof}
+Assume $\ACA$.  The formula $\mathrm{Below}(a,e)$ is arithmetical with
+parameter $a$, so arithmetical comprehension produces
+$Y=\{e:\mathrm{Below}(a,e)\}$.
+
+Conversely, assume $\UGapTail$.  It suffices over $\RCA$ to obtain the range
+of every injection.  Let $f:\mathbb N\to\mathbb N$ be injective and define
+\[
+a_f(y,m)=
+\begin{cases}
+1-\dfrac{1}{m+1},&\exists x\leq m\;f(x)=y,\\[1ex]
+0,&\text{otherwise.}
+\end{cases}
+\]
+The array is uniformly recursive in $f$.  If $y\in\ran(f)$, the row is
+eventually $1-1/(m+1)$ and satisfies $\mathrm{AtOne}(a_f,y)$.  If
+$y\notin\ran(f)$, it is identically $0$ and satisfies
+$\mathrm{Below}(a_f,y)$.  Thus all rows are gap-promised and
+\[
+\mathrm{Below}(a_f,y)\Longleftrightarrow y\notin\ran(f).
+\]
+Applying $\UGapTail$ gives a set for the complement of $\ran(f)$; recursive
+comprehension gives its complement.  The range-existence principle for
+injections is equivalent over $\RCA$ to $\ACA$.
+\end{proof}
+
+\begin{remark}[No inflation]
+Theorem~\ref{thm:ugap} concerns the stated uniform family only.  It does not
+make a claim about the single temporal witness, every tail predicate, or any
+application of the diagnostic.
+\end{remark}
+
+
+\section{Universal M-space proof architecture}
+\label{sec:universal-mspace}
+
+The preceding results decide when a declared target survives a declared
+representation.  This section applies that same factorization discipline to
+mathematical proofs themselves.  It formalizes four architectural claims:
+universal representation on the maximal finitely communicable proof domain;
+maximal compression relative to a declared audit family; three-dimensional
+visual realization of the resulting audit quotient; and necessity, up to
+audit-equivalent representation, in novelty-separated derivational domains.
+The detailed constructions and full proofs are supplied in the supplement.
+
+\begin{definition}[Finitarily checkable calculus and communicable proof witness]
+\label{def:communicable-v9}
+A finitarily checkable calculus is a finite code
+\[
+C=(\Sigma_C,\mathsf{Form}_C,\mathsf{Rule}_C,\mathsf{End}_C,\mathsf{Check}_C)
+\]
+in which formulas are decidable finite strings, inference records are finite
+directed acyclic hypergraphs with finite premise lists, and
+$\mathsf{Check}_C$ is a terminating local verifier.  A communicable purely
+mathematical proof witness is a pair $p=(C,D)$ in which $D$ is an accepted
+finite derivation record.  A recursively described proof is included when its
+generator, boundary conditions, and local verifier have a finite accepted code.
+Write $\Proofs$ for this class.
+\end{definition}
+
+The finite-communication restriction is exact rather than discretionary: no
+finite artifact language can injectively represent an uncountable class of
+distinct non-finitely-specifiable objects.  Thus $\Proofs$ is the largest
+domain on which a theorem of universal finite communicable representation can
+be true.
+
+\begin{definition}[M-space proof tower]
+\label{def:mtower-v9}
+For $n\in\mathbb N$, let $\mathcal M_n$ be the class of finite tuples
+\[
+m=(G,L_0,L_1,\ldots,L_n),
+\]
+where $G$ is a finite typed directed proof-incidence graph and each $L_i$ is a
+finite typed record layer attached to vertices, edges, paths, or finite
+subcomplexes.  The base layers store respectively exact source syntax,
+normalized type information, local inference and binding certificates, and
+audit/provenance/display obligations; higher layers store finite certificates
+about lower-layer certificates.  The lifts append an empty layer and the
+projections delete the last layer.  Set
+\[
+\MInf=\bigcup_{n\in\mathbb N}\mathcal M_n
+\]
+under these lifts.
+\end{definition}
+
+\begin{theorem}[Universal M-space proof representation]
+\label{thm:universal-v9}
+There are maps
+\[
+\MEnc:\Proofs\longrightarrow\MInf,
+\qquad
+\MDec:\operatorname{im}(\MEnc)\longrightarrow\Proofs
+\]
+such that for every $p\in\Proofs$ there is a finite $N(p)$ with
+$\MEnc(p)\in\mathcal M_{N(p)}$ and
+\[
+\MDec(\MEnc(p))=p.
+\]
+The typed incidence graph, ordered premise bindings, local checker records,
+certificate references, provenance records, and declared audit obligations are
+recoverable from $\MEnc(p)$.
+\end{theorem}
+
+\begin{proof}
+Store the exact finite code $(C,D)$ in $L_0$, construct the finite typed
+incidence graph of $D$, and attach the finite normalization, certificate,
+provenance, and audit records in successive finite layers.  The decoder reads
+the exact $L_0$ serialization and verifies agreement with the derived layers.
+All construction steps terminate on finite data, so the resulting object lies
+at a finite level and decodes exactly to $p$.
+\end{proof}
+
+\begin{definition}[Audit family and audit quotient]
+\label{def:auditquot-v9}
+An audit family $\mathcal A$ on $\Proofs$ is a set of task maps
+$a:\Proofs\to Y_a$.  Define
+\[
+p\AuditEq p'
+\quad\Longleftrightarrow\quad
+\forall a\in\mathcal A\,[a(p)=a(p')],
+\qquad
+\AuditQuot(p)=[p]_{\AuditEq}.
+\]
+A representation $r:\Proofs\to R$ is audit-faithful when every
+$a\in\mathcal A$ factors through $r$.
+\end{definition}
+
+\begin{theorem}[Audit-optimal compression]
+\label{thm:auditquot-v9}
+The audit quotient $\AuditQuot$ is audit-faithful.  For every
+audit-faithful representation $r:\Proofs\to R$, there is a unique map
+\[
+h_r:\operatorname{im}(r)\to\Proofs/{\AuditEq}
+\]
+such that
+\[
+\AuditQuot=h_r\circ r.
+\]
+Hence $\AuditQuot$ is the coarsest representation preserving every declared
+audit distinction.
+\end{theorem}
+
+\begin{proof}
+Each task $a$ is well defined on an $\AuditEq$-class, so it factors through
+$\AuditQuot$.  If $r(p)=r(p')$, audit faithfulness implies
+$a(p)=a(p')$ for every $a$, hence $p\AuditEq p'$.  Therefore
+$h_r(r(p))=[p]_{\AuditEq}$ is well defined and is unique on the image.
+\end{proof}
+
+The word ``maximal'' consequently has a precise invariant meaning: the quotient
+removes every distinction irrelevant to the declared audit and no distinction
+needed by it.  It does not claim an impossible universal dominance in raw
+description length across all lossless codes.
+
+\begin{lemma}[Universal edge-separated three-dimensional realization]
+\label{lem:3d-v9}
+Every finite proof-dependency graph has an edge-separated labelled realization
+in $\Rthree$.
+\end{lemma}
+
+\begin{proof}
+Assign distinct parameters $t_1,\ldots,t_n$ to the vertices and place vertex
+$i$ at $(t_i,t_i^2,t_i^3)$.  No four distinct points on this moment curve are
+coplanar.  If two nonincident straight edges intersected, their four endpoints
+would be coplanar, a contradiction.  Finite labels preserve vertex and edge
+types, premise order, and certificate references.
+\end{proof}
+
+\begin{theorem}[Three-dimensional universal minimality]
+\label{thm:3dmin-v9}
+Three is the least Euclidean dimension in which every finite
+proof-dependency graph admits an edge-separated visual realization.
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:3d-v9} proves sufficiency.  For necessity, a finite proof ledger
+can contain a subdivision of $K_5$: take five certified axiom occurrences and,
+for each pair, a conjunction-introduction inference joining the two occurrences.
+An edge-separated realization in $\mathbb R^2$ would make this subdivision
+planar, hence make $K_5$ planar after contraction, contradicting
+$|E(K_5)|=10>3\cdot5-6$.  Dimensions zero and one fail a fortiori.
+\end{proof}
+
+For graph-shaped proof-dependency audit, the quotient has a single labelled
+edge-separated $\Rthree$ realization.  Its use as a single-view audit display is
+conditional on the full labelled incidence graph satisfying the declared
+finite-interface capability bound.  For audit content carried by intrinsic
+geometry rather than dependency incidence, the supplement proves the
+corresponding conditional result for a complete aspect--scale decomposition
+equipped with a finite admissible projection plan: each proof activates only a
+finite indexed record of coherent three-dimensional views, supplied with local
+and global decoders that recover the declared audit quotient.  Under the
+explicit finite-legend and trusted-local-kernel capability model, that record
+supports a finite sound-and-complete structural audit without theorem-specific
+subject-matter expertise.  This is a conditional interface theorem, not an
+assertion about unmodeled cognition.
+
+\begin{definition}[Novelty-separated derivational problem]
+\label{def:novel-v9}
+A derivational problem is a triple $\mathfrak D=(X,T,\mathcal R)$, where
+$X\subseteq\Proofs$ is a declared class of proof or proof-search states,
+$T:X\to Y$ is a required derivational or audit target, and $\mathcal R$ is a
+family of available representation channels.  It is novelty-separated relative
+to $\mathcal R$ when
+\[
+\forall r\in\mathcal R\;\exists x,y\in X
+\quad r(x)=r(y)\ \text{and}\ T(x)\neq T(y).
+\]
+\end{definition}
+
+\begin{theorem}[Representation necessity up to audit equivalence]
+\label{thm:necessity-v9}
+No channel in a novelty-separated family supports a reliable decision of $T$ on
+$X$.  If $T$ includes a full audit family $\mathcal A$, every reliable
+replacement must retain a refinement through which the restricted quotient
+$\AuditQuot|_X$ factors.  When the required audit is universal,
+edge-separated, and visually traceable by the declared general-background
+auditor, the replacement must additionally admit an audit-equivalent
+three-dimensional factor: one view for graph-shaped content and a coherent
+family of views otherwise.
+\end{theorem}
+
+\begin{proof}
+The first statement is the fiber criterion: equal representation values with
+unequal target values preclude factorization of $T$.  The second is
+Theorem~\ref{thm:auditquot-v9} applied to $X$.  The last statement follows from
+Theorem~\ref{thm:3dmin-v9} and from the finite admissible projection-plan
+construction given in the supplement.  A singleton visual factor is available
+for graph-shaped content only when the full selected incidence display satisfies
+the declared interface bound.
+\end{proof}
+
+
+\subsection{Collective proof-audit capacity and empirical bridge}
+\label{sec:capacity-v10}
+
+The preceding necessity theorem is pointwise: a representation that merges
+target-distinct proof states cannot decide the target.  A collective mathematical
+workflow introduces a second question: whether the rate at which source-visible
+audit obligations arrive can be resolved with the audit capacity available to a
+community.  The following ledger formalizes that question without identifying a
+repository, a field, or a bibliographic network with mathematics as a whole.
+
+\begin{definition}[Time-indexed proof-audit ledger]
+\label{def:ledger-v10}
+For discrete windows $t\in\mathbb N$, a proof-audit ledger is
+\[
+  \Ledger_t=(V_t,E_t,O_t,R_t,\tau_t).
+\]
+Here $V_t$ is a finite set of versioned proof-relevant artifacts, $E_t$ is a
+finite typed relation set (including, when supported by the source, dependency,
+review, challenge, repair, supersession, and resolution), $O_t\subseteq V_t$ is
+the unresolved audit-item set, $R_t$ is the set of recorded resolutions, and
+$\tau_t$ records source version and provenance.  This is a ledger of
+source-visible artifacts, not a claim of ontological completeness for
+mathematics.
+\end{definition}
+
+\begin{definition}[Audit-work accounting]
+\label{def:work-v10}
+Fix an audit family $\mathcal A$ and an $\mathcal A$-faithful representation
+$\rho$.  Let $A_t$ be the finite set of audit obligations opened or reopened in
+window $t$, let $c_\rho(o)\geq 0$ be the work charged to resolve $o$ through
+$\rho$, and let $\AuditCap_t\geq0$ be the work capacity available in that window.
+Define the incoming audit demand and debt recurrence by
+\[
+ \Demand_\rho(t)=\sum_{o\in A_t}c_\rho(o),\qquad
+ \Debt_{\rho,t+1}=\max\{0,\Debt_{\rho,t}+\Demand_\rho(t)-\AuditCap_t\}.
+\]
+The units of $c_\rho$ may be time, verified traversal steps, or a declared
+weighted audit count; they must be fixed before any empirical use.  This is a
+deterministic reflected workload recurrence; no stochastic queueing premise is
+used by the theorem below.
+\end{definition}
+
+\begin{assumption}[Audit-cost monotonicity]
+\label{ass:cost-v10}
+For audit-faithful representations $\rho_1$ and $\rho_2$, if
+$\rho_1=u\circ\rho_2$ for some map $u$ on $\operatorname{im}(\rho_2)$, then
+$c_{\rho_1}(o)\leq c_{\rho_2}(o)$ for every obligation $o$ in the declared
+domain.  Thus retaining audit-irrelevant distinctions cannot reduce the declared
+structural audit work.
+\end{assumption}
+
+\begin{theorem}[Audit-debt divergence]
+\label{thm:debt-v10}
+If there are $t_0\in\mathbb N$ and $\varepsilon>0$ such that
+\[
+  \Demand_\rho(t)-\AuditCap_t\geq\varepsilon
+  \quad\text{for every }t\geq t_0,
+\]
+then
+\[
+  \Debt_{\rho,t}\geq\Debt_{\rho,t_0}+(t-t_0)\varepsilon
+  \quad\text{for every }t\geq t_0,
+\]
+and hence $\Debt_{\rho,t}\to\infty$.
+\end{theorem}
+
+\begin{proof}
+The recurrence in \Cref{def:work-v10} gives
+$\Debt_{\rho,t+1}\geq\Debt_{\rho,t}+\varepsilon$ for $t\geq t_0$.
+Induction proves the displayed inequality.
+\end{proof}
+
+\begin{theorem}[Audit-quotient capacity dominance]
+\label{thm:capacity-v10}
+Under \Cref{ass:cost-v10}, for every $\mathcal A$-faithful representation
+$r$ and every time window,
+\[
+  \Demand_{\AuditQuot}(t)\leq\Demand_r(t).
+\]
+If the two ledgers begin with equal debt and share the same capacity schedule,
+then
+\[
+  \Debt_{\AuditQuot,t}\leq\Debt_{r,t}
+  \qquad(t\in\mathbb N).
+\]
+Suppose that $r$ has a persistent positive demand-capacity gap while
+\[
+  \Demand_{\AuditQuot}(t)-\AuditCap_t\leq0
+  \qquad(t\geq t_0)
+\]
+for some $t_0$.  Then replacement of $r$ by the audit quotient is a sufficient
+representation-level repair: quotient debt is nonincreasing after $t_0$, while
+the debt of $r$ diverges.
+
+More generally, avoiding the divergence conclusion requires changing at least
+one stated antecedent of \Cref{thm:debt-v10}: the representation-specific
+demand, the capacity schedule, the incoming obligation process, the declared
+audit domain or task, or the persistence condition.  This does not assert that
+every successful repair must literally use the quotient realization.
+\end{theorem}
+
+\begin{proof}
+By \Cref{thm:auditquot-v9}, $\AuditQuot=h_r\circ r$ on
+$\operatorname{im}(r)$.  Audit-cost monotonicity therefore gives
+$c_{\AuditQuot}(o)\leq c_r(o)$ for each incoming obligation, and summation gives
+the demand inequality.  The debt inequality follows by induction from the
+monotonicity of $x\mapsto\max\{0,x\}$.
+
+Under the nonpositive quotient excess condition,
+\[
+  \Debt_{\AuditQuot,t+1}\leq\Debt_{\AuditQuot,t}
+  \qquad(t\geq t_0).
+\]
+The persistent excess of $r$ yields divergence by \Cref{thm:debt-v10}.  The
+final statement follows because that divergence theorem depends only on its
+displayed recurrence and antecedent conditions; another repair may avoid
+divergence by changing one of them without literally adopting the quotient.
+\end{proof}
+
+\begin{remark}[Formal criterion versus empirical bridge]
+\label{rem:protocol-v10}
+\Cref{thm:debt-v10,thm:capacity-v10} is a theorem about a declared ledger and
+work model.  It does not assert that an informal mathematical field presently
+has a growing debt, that any particular graph statistic measures truth, or that
+a three-dimensional interface is empirically fastest for every user.  Those
+questions are bridge-required.  A companion preregistered protocol specifies
+source-visible formal corpora (for example, \texttt{mathlib} and the Archive of
+Formal Proofs), locked-test forecasting of future ledger debt, and a randomized
+comparison of text, 2D, quotient-linked 2D, and quotient-linked 3D structural
+audit conditions \cite{mathlib2020,vanDoorn2020,blanchette2015,huch2024,nosek2018}.
+Bibliographic graphs are secondary communication evidence rather than proof
+validity evidence; algebraic connectivity is a descriptive graph statistic, not
+an epistemic truth measure \cite{fiedler1973,chung1997}.
+\end{remark}
+
+\begin{theorem}[Assembled universal M-space proof architecture]
+\label{thm:fullarch-v9}
+For the class $\Proofs$ of communicable purely mathematical proof witnesses:
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=2.6em]
+\item every proof has an exact finite M-space representation and decoder;
+\item the audit quotient is maximally compressive in the task-relative quotient
+sense;
+\item given a complete aspect--scale decomposition and a finite admissible
+projection plan, the quotient has an audit-preserving finite indexed record of
+edge-separated three-dimensional views; for graph-shaped proof-dependency audit,
+this record is a singleton exactly when the full labelled incidence display
+satisfies the declared interface bound;
+\item three dimensions are universally minimal for edge-separated proof-graph
+tracing;
+\item under the declared structural-auditor model, a plan-realized structural
+audit family, a terminating local kernel, and a finite admissible projection
+plan, the displayed record is sound and complete for the declared structural
+audit;
+\item in novelty-separated derivational domains, reliable derivation requires an
+audit-equivalent refinement of the quotient and, under the visual-audit
+requirement, an audit-equivalent three-dimensional factor realized by the
+declared finite plan; and
+\item under the declared audit-work accounting and audit-cost monotonicity,
+the audit quotient weakly minimizes incoming audit demand among faithful
+representations.  A persistent representation-induced demand-capacity gap
+produces unbounded debt; if the quotient has nonpositive excess, quotient
+replacement is a sufficient representation-level repair, without excluding
+other repairs that change a stated premise of the recurrence.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Items (i)--(iii) are Theorems~\ref{thm:universal-v9} and
+\ref{thm:auditquot-v9} together with the finite admissible projection-plan
+construction in the supplement; item (iv) is Theorem~\ref{thm:3dmin-v9};
+item (v) is the supplement's corrected conditional structural-audit theorem;
+item (vi) is Theorem~\ref{thm:necessity-v9}; and item (vii) is
+Theorem~\ref{thm:capacity-v10}.
+\end{proof}
+
+\begin{remark}[Scope of the architectural theorem]
+\label{rem:scope-v9}
+The theorem is about finite communicable proof witnesses, task-relative audit
+compression, and structural derivation/audit.  It does not assert a universal
+algorithm for discovering all mathematics, semantic soundness of an arbitrary
+calculus without a soundness certificate, a literal-format monopoly, or an
+unmodeled empirical claim that every person can understand every mathematical
+concept merely by viewing a display.  It also does not claim that a source-visible
+ledger measures all mathematical activity.  The invariant conclusion is stronger
+and more exact: any reliable workflow for the stated task must preserve the audit
+quotient; universal edge-separated visual tracing requires a
+three-dimensional-equivalent factor realized under its declared finite audit
+plan; and retaining audit-irrelevant distinctions cannot improve the formal
+demand margin under the stated cost model.  Quotient replacement is sufficient
+when it removes the persistent excess, but the theorem does not impose a literal
+monopoly on all successful repairs.
+\end{remark}
+
+\section{Applications, auditability, and bridge discipline}
+\label{sec:bridge}
+
+\begin{definition}[Application bridge record]
+An application bridge record is
+\[
+\mathsf{Bridge}_{\mathrm{app}}=
+\bigl(X_{\mathrm{app}},\iota,T_{\mathrm{app}},o_{\mathrm{app}},
+\Psi_{\mathrm{app}},\mathcal R,\mathcal E,\mathsf{Status}\bigr),
+\]
+where $\iota:X_{\mathrm{app}}\to X$ is a declared encoding and the record
+separately states whether
+\[
+\iota\circ T_{\mathrm{app}}=T\circ\iota,\qquad
+o_{\mathrm{app}}=o\circ\iota,\qquad
+\Psi_{\mathrm{app}}=\Psi\circ\iota
+\]
+hold on the intended domain.  The lists $\mathcal R$ and $\mathcal E$ record
+unresolved premises and defeater forms.  The status set is
+\[
+\{\mathsf{THM},\mathsf{CND},\mathsf{BR},\mathsf{HEUR},\mathsf{OUT},\mathsf{DEF}\}.
+\]
+\end{definition}
+
+The M-space proof architecture of Section~\ref{sec:universal-mspace} is an
+additional formal core, independent of Theorems~\ref{thm:fiber}--\ref{thm:ugap}.
+It proves exact representation for communicable proof witnesses, quotient-optimal
+audit compression, and the minimal universal dimension for edge-separated
+proof-dependency visualization.  It proves necessity only up to
+audit-equivalent representation and only under its declared novelty-separation,
+finite-plan, and visual-audit requirements.  Its ledger-capacity extension is
+likewise conditional on the declared work model; the companion corpus and
+interface protocol is required to test its empirical premises.  None of these results makes
+an application bridge true, establishes the semantic soundness of an arbitrary
+model without its own soundness certificate, or entails a physical,
+institutional, or policy conclusion.
+
+\section{Conclusion}
+
+For a declared observation map, an orbit target is decidable exactly when it is
+fiber-constant.  The temporal witness shows that every declared finite monitor
+may be decidable at its matching stage while a distinct long-run target remains
+undecidable from full observed history.  The correct consequence is a
+record-level diagnostic of representational adequacy, not a state-level regime or
+an action policy.
+
+The binding-sensitive theorem makes the paper's functional claim visible: a
+component list can preserve all local ingredients yet lose the channel--target--
+certificate relation needed for the diagnostic.  The M-space theorem package
+extends this point to proof architecture: every communicable proof has an exact
+typed M-space encoding; the audit quotient is the coarsest task-faithful
+compression; and the quotient has a universally dimension-minimal
+edge-separated three-dimensional realization for proof-dependency audit.  In
+novelty-separated derivational domains, a reliable workflow must preserve this
+audit content up to representation equivalence.  The proof-audit ledger adds a
+collective constraint: under a stated cost model, an audit quotient weakly
+minimizes workload, and a persistent excess of workload over capacity produces
+unbounded unresolved audit debt.  When the quotient itself has nonpositive
+excess, quotient replacement is a sufficient representation-level repair;
+other repairs are not excluded if they change a stated recurrence premise.
+Whether formal repositories exhibit that pattern, and whether quotient-linked
+2D or 3D displays improve actual audit performance, is deliberately allocated
+to a preregistered empirical bridge.
+Separately, $\UGapTail\leftrightarrow\ACA$ gives an exact proof-theoretic theorem
+for a uniform family.  Every external application or physical interpretation
+remains bridge-required.
+
+\begin{thebibliography}{99}
+\bibitem{AlpernSchneider1985}
+B. Alpern and F. B. Schneider.
+\newblock Defining liveness.
+\newblock \emph{Information Processing Letters}, 21(4):181--185, 1985.
+
+\bibitem{Pnueli1977}
+A. Pnueli.
+\newblock The temporal logic of programs.
+\newblock In \emph{Proceedings of the 18th Annual Symposium on Foundations of
+Computer Science}, pages 46--57. IEEE, 1977.
+
+\bibitem{Simpson2009}
+S. G. Simpson.
+\newblock \emph{Subsystems of Second Order Arithmetic}, second edition.
+\newblock Cambridge University Press, 2009.
+
+\bibitem{blanchette2015}
+J.~C. Blanchette, M.~Haslbeck, D.~Matichuk, and T.~Nipkow.
+\newblock Mining the Archive of Formal Proofs.
+\newblock In \emph{Intelligent Computer Mathematics}, pages 3--17. Springer, 2015.
+\newblock doi: \href{https://doi.org/10.1007/978-3-319-20615-8_1}{10.1007/978-3-319-20615-8\_1}.
+
+\bibitem{chung1997}
+F.~R.~K. Chung.
+\newblock \emph{Spectral Graph Theory}.
+\newblock American Mathematical Society, 1997.
+
+\bibitem{fiedler1973}
+M.~Fiedler.
+\newblock Algebraic connectivity of graphs.
+\newblock \emph{Czechoslovak Mathematical Journal}, 23(2):298--305, 1973.
+\newblock doi: \href{https://doi.org/10.21136/CMJ.1973.101168}{10.21136/CMJ.1973.101168}.
+
+\bibitem{huch2024}
+F.~Huch and M.~Wenzel.
+\newblock Distributed parallel build for the Isabelle Archive of Formal Proofs.
+\newblock In \emph{15th International Conference on Interactive Theorem Proving (ITP 2024)},
+LIPIcs 309, Article 22, 2024.
+\newblock doi: \href{https://doi.org/10.4230/LIPIcs.ITP.2024.22}{10.4230/LIPIcs.ITP.2024.22}.
+
+\bibitem{mathlib2020}
+The mathlib Community.
+\newblock The Lean mathematical library.
+\newblock In \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs},
+pages 367--381, 2020.
+\newblock doi: \href{https://doi.org/10.1145/3372885.3373824}{10.1145/3372885.3373824}.
+
+\bibitem{nosek2018}
+B.~A. Nosek, C.~R. Ebersole, A.~C. DeHaven, and T.~Mellor.
+\newblock The preregistration revolution.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 115(11):2600--2606, 2018.
+\newblock doi: \href{https://doi.org/10.1073/pnas.1708274114}{10.1073/pnas.1708274114}.
+
+\bibitem{vanDoorn2020}
+F.~van Doorn, G.~Ebner, and R.~Y. Lewis.
+\newblock Maintaining a library of formal mathematics.
+\newblock arXiv:2004.03673, 2020.
+\end{thebibliography}
+
+\end{document}
