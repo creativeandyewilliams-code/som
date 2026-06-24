@@ -1,0 +1,61 @@
+name: SomControlV11 build certificate
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: lake build SomControlV11.Release.V11Claims
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: som-control-v11
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            -o elan-init.sh
+          chmod +x elan-init.sh
+          ./elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Check no sorry in release graph
+        run: |
+          if grep -rn -E '\bsorry\b|\badmit\b' \
+              SomControlV11/Core \
+              SomControlV11/Temporal \
+              SomControlV11/Diagnostic \
+              SomControlV11/ReverseMath \
+              SomControlV11/MSpace \
+              SomControlV11/Ledger \
+              SomControlV11/Release 2>/dev/null; then
+            echo "ERROR: sorry or admit found in release graph"
+            exit 1
+          fi
+          echo "No sorry or admit in release graph."
+
+      - name: lake build
+        run: lake build SomControlV11.Release.V11Claims
+
+      - name: Record build certificate
+        run: |
+          {
+            echo "package: SomControlV11"
+            echo "release_target: SomControlV11.Release.V11Claims"
+            echo "commit: $(git rev-parse HEAD)"
+            echo "lean: $(lean --version)"
+            echo "lake: $(lake --version)"
+            echo "date: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "status: BUILD SUCCEEDED"
+          } | tee BUILD_CERTIFICATE_V11.txt
+
+      - name: Upload build certificate
+        uses: actions/upload-artifact@v4
+        with:
+          name: som-control-v11-certificate
+          path: som-control-v11/BUILD_CERTIFICATE_V11.txt
