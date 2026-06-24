@@ -134,14 +134,20 @@ theorem tail_xB : ¬ Tail xB := by
   intro ⟨k, hk, M, hM⟩
   have hbound := hM (max M k) (le_max_left M k)
   rw [p_iter_xB] at hbound
-  have hmk : k ≤ max M k := le_max_right M k
   have hkq : (0 : ℚ) < (k : ℚ) := Nat.cast_pos.mpr hk
   have hm1q : (0 : ℚ) < (max M k : ℚ) + 1 := by positivity
+  have h_lt : (k : ℚ) < (max M k : ℚ) + 1 := by
+    exact_mod_cast Nat.lt_succ_of_le (le_max_right M k)
+  -- hbound gives 1/k ≤ 1/(max M k + 1); cross-multiply to get max M k + 1 ≤ k.
   have h_inv : 1 / (k : ℚ) ≤ 1 / ((max M k : ℚ) + 1) := by linarith
-  have h_lt : (k : ℚ) < (max M k : ℚ) + 1 := by exact_mod_cast Nat.lt_succ_of_le hmk
-  have h_anti : (max M k : ℚ) + 1 ≤ k := by
-    rwa [div_le_div_iff hkq hm1q, one_mul, one_mul] at h_inv
-  linarith
+  have hmul : k * ((max M k : ℚ) + 1) * (1 / (k : ℚ)) ≤
+              k * ((max M k : ℚ) + 1) * (1 / ((max M k : ℚ) + 1)) :=
+    mul_le_mul_of_nonneg_left h_inv (mul_pos hkq hm1q).le
+  have heq1 : k * ((max M k : ℚ) + 1) * (1 / (k : ℚ)) = (max M k : ℚ) + 1 := by
+    field_simp
+  have heq2 : k * ((max M k : ℚ) + 1) * (1 / ((max M k : ℚ) + 1)) = k := by
+    field_simp
+  linarith [heq1 ▸ heq2 ▸ hmul]
 
 /-! ## Theorem N1 (headline): first-order non-descent -/
 
