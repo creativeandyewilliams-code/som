@@ -49,7 +49,7 @@ jobs:
         id: build
         run: |
           set +e
-          lake build 2>&1 | tee /tmp/build.log
+          lake build SomTail 2>&1 | tee /tmp/build.log
           BUILD_EXIT=${PIPESTATUS[0]}
           echo "BUILD_EXIT=$BUILD_EXIT" >> "$GITHUB_ENV"
           set -e

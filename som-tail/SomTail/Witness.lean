@@ -66,7 +66,7 @@ lemma T_iter (m : ℕ) (θ : Bool) (s : ℕ → Bool) (i : ℕ) :
   | succ n ih =>
     rw [Function.iterate_succ_apply']
     simp only [T, ih]
-    constructor <;> rfl
+    simp [Nat.add_succ]
 
 lemma p_iter_xA (m : ℕ) : p (T^[m] xA) = 0 := by
   simp [xA, p]
@@ -109,17 +109,19 @@ theorem tower_refines (n : ℕ) :
     intro k hk
     simp only [List.mem_range] at hk
     simp [Nat.le_of_lt_succ hk]
-  · -- Different (n+1)-step histories: x₀ observes `false` at step n+1.
+  · -- Different (n+1)-step histories: x₀ has false at step n+1, x₁ has true.
     simp only [qFin, o, T_iter, zero_add, ne_eq]
     intro h
-    -- Extract element at position n+1.
-    have hlen : n + 1 < (List.range (n + 2)).length := by simp
-    have heq := congr_arg (fun l => l.get ⟨n + 1, by simp⟩) h
-    simp only [List.get_map, List.get_range] at heq
-    -- heq : decide (n + 1 ≤ n) = true
-    have := Bool.eq_true_iff_eq_true.mp heq  -- heq itself is a Bool
-    rw [decide_eq_true_eq] at heq
-    omega
+    -- false ∈ LHS (from step n+1 where decide (n+1 ≤ n) = false)
+    have hmem_lhs : false ∈ (List.range (n + 2)).map (fun k => decide (k ≤ n)) := by
+      apply List.mem_map.mpr
+      exact ⟨n + 1, List.mem_range.mpr (Nat.lt_succ_self _), by
+        simp [decide_eq_false_iff_not, Nat.not_succ_le_self]⟩
+    -- false ∉ RHS (all entries are true)
+    have hmem_rhs : false ∉ (List.range (n + 2)).map (fun _ => true) := by
+      simp [List.mem_map]
+    rw [h] at hmem_lhs
+    exact hmem_rhs hmem_lhs
 
 /-! ## Theorem N1 (core): shared full observation history -/
 
