@@ -1,0 +1,90 @@
+name: som-tail build certificate
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "som-tail/**"
+      - ".github/workflows/som-tail-build.yml"
+  pull_request:
+    paths:
+      - "som-tail/**"
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: lake build (SomTail)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: som-tail
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            -o elan-init.sh
+          chmod +x elan-init.sh
+          ./elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Toolchain and Lake versions
+        run: |
+          lean --version
+          lake --version
+
+      - name: Fetch Mathlib cache
+        run: |
+          lake exe cache get || echo "CACHE_STATUS=unavailable" >> "$GITHUB_ENV"
+        continue-on-error: true
+
+      - name: Structural pre-check
+        run: |
+          python3 scripts/verify_structure.py SomTail | tee /tmp/precheck.txt
+          echo "PRECHECK_EXIT=${PIPESTATUS[0]}" >> "$GITHUB_ENV"
+
+      - name: lake build
+        id: build
+        run: |
+          set +e
+          lake build 2>&1 | tee /tmp/build.log
+          BUILD_EXIT=${PIPESTATUS[0]}
+          echo "BUILD_EXIT=$BUILD_EXIT" >> "$GITHUB_ENV"
+          set -e
+          exit $BUILD_EXIT
+
+      - name: Record build certificate
+        if: always()
+        run: |
+          BUILD_EXIT="${{ env.BUILD_EXIT }}"
+          if [ "$BUILD_EXIT" = "0" ]; then
+            VERDICT="GREEN — all compiled theorems kernel-checked"
+          else
+            VERDICT="RED — build failed (exit $BUILD_EXIT)"
+          fi
+          {
+            echo "commit: $(git rev-parse HEAD)"
+            echo "lean: $(lean --version)"
+            echo "lake: $(lake --version)"
+            echo "mathlib-sha: $(cat .lake/packages/mathlib/.git/HEAD 2>/dev/null || echo 'see lake-manifest.json')"
+            echo "cache-used: ${CACHE_STATUS:-available}"
+            echo "build-exit: $BUILD_EXIT"
+            echo "verdict: $VERDICT"
+            echo "---"
+            echo "precheck:"
+            cat /tmp/precheck.txt || true
+            echo "---"
+            echo "build-log (tail):"
+            tail -100 /tmp/build.log || true
+          } | tee CERTIFICATE_RAW.txt
+
+      - name: Upload build certificate
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: som-tail-build-certificate
+          path: |
+            som-tail/CERTIFICATE_RAW.txt
+            som-tail/CERTIFICATE.md
